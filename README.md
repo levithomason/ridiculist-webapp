@@ -3,7 +3,6 @@ Ridiculist
 
 Ridiculously simple lists, for everything.
 
-
 # Hack on it
 
 1. Clone
