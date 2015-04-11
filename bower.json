@@ -13,5 +13,8 @@
     "html5-boilerplate": "~4.3.0",
     "angularfire": "~1.0.0",
     "less.js": "~2.5.0"
+  },
+  "resolutions": {
+    "angular": "1.2.28"
   }
 }

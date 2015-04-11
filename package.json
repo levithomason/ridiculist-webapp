@@ -15,9 +15,8 @@
   "scripts": {
     "postinstall": "bower install",
     "prestart": "npm install",
-    "postsetup": "npm start", 
-    "start": "$(npm bin)/live-server app",
-    "server": "$(npm bin)/live-server app",
+    "start": "npm run server",
+    "server": "$(npm bin)/live-server",
     "pretest": "npm install",
     "test": "karma start karma.conf.js",
     "test-single-run": "karma start karma.conf.js  --single-run",
