@@ -1,10 +1,10 @@
 'use strict';
 
-angular.module('App.lists', ['ngRoute'])
+angular.module('App.list', ['ngRoute'])
 
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/:id', {
-            templateUrl: 'app/views/lists/lists.html',
+            templateUrl: 'app/views/list/list.html',
             controller: 'ListCtrl'
         });
     }])
