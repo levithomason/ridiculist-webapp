@@ -12,7 +12,7 @@ angular.module('App', [
     
     // views
     'App.home',
-    'App.lists',
+    'App.list',
 ])
     .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
         $routeProvider.otherwise({redirectTo: '/'});

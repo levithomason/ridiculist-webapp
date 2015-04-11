@@ -10,4 +10,4 @@ Ridiculously simple lists, for everything.
 
 This will install node modules, bower components, start the live reload server, and open your browser.
 
-Run server only: `npm run server`
+Run server only: `gulp server`
