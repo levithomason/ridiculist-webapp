@@ -1,0 +1,9 @@
+<!--<pre>{{ data | json}}</pre>-->
+<h1>{{ data.Name }}</h1>
+<ul class="list-group">
+    <li class="list-group-item" ng-repeat="(k, v) in data.List">
+        <button class="btn btn-link" ng-click="increment(k, v)">+1</button>
+        {{ k }}
+        <span class="badge">{{ v }}</span>
+    </li>
+</ul>
