@@ -1,6 +1,7 @@
-[Ridiculist](http://dev-coop.github.io/ridiculist-webapp)
+Ridiculist
 ==========
 
+## [Demo](https://ridiculist.herokuapp.com/ )
 Ridiculously simple lists, for everything.
 
 # Hack on it
