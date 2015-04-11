@@ -1,4 +1,4 @@
-Ridiculist
+[Ridiculist](http://dev-coop.github.io/ridiculist-webapp)
 ==========
 
 Ridiculously simple lists, for everything.
