@@ -1,0 +1,21 @@
+<div class="container">
+    <h2 class="page-header">Public Lists</h2>
+
+    <div class="lst-public-lists">
+
+        <a ng-href="/#/{{ listId }}" ng-repeat="(listId, listData) in lists">
+            <div class="panel panel-default pull-left">
+                <div class="panel-heading">
+                    {{ listData.Name }}
+                </div>
+                <div class="panel-body">
+                    <div ng-repeat="(k, v) in listData.List">
+                        {{ k }}
+                        <div class="text-muted pull-right">{{ v }}</div>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+    </div>
+</div>

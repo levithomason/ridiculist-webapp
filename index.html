@@ -8,12 +8,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Ridiculist</title>
-    <meta name="description" content="">
+    <meta name="description" content="Ridiculously simple lists, for everything.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="app/app.less">
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
-    
-    <script src="bower_components/less.js/dist/less.js"></script>
+    <link rel="stylesheet/less" href="app/less/app.less">
+    <link rel="stylesheet" href="app/bower/ionicons/css/ionicons.css"/>
+    <link href="http://fonts.googleapis.com/css?family=Lily+Script+One|Open+Sans:400,700" rel="stylesheet" type="text/css">
+    <script src="app/bower/less.js/dist/less.js"></script>
 </head>
 
 <body>
@@ -23,23 +23,36 @@
     your browser</a> to improve your experience.</p>
 <![endif]-->
 
-<div class="container">
-    <div ng-view></div>
+<div class="jumbotron">
+    <div class="container text-center">
+        <h1>
+            <i class="ion-android-list"></i>
+            Ridiculist
+        </h1>
+
+        <p class="lead">
+            Ridiculously simple lists, for everything.
+        </p>
+
+        <new-list></new-list>
+    </div>
 </div>
 
-<!-- In production use:
-<script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
--->
+<div ng-view></div>
+
 <!-- Angular -->
-<script src="bower_components/angular/angular.js"></script>
-<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="app/bower/angular/angular.js"></script>
+<script src="app/bower/angular-route/angular-route.js"></script>
 
 <!-- Firebase -->
-<script src="bower_components/firebase/firebase.js"></script>
-<script src="bower_components/angularfire/dist/angularfire.js"></script>
+<script src="app/bower/firebase/firebase.js"></script>
+<script src="app/bower/angularfire/dist/angularfire.js"></script>
 
 <!-- App -->
 <script src="app/app.js"></script>
-<script src="app/lists/lists.js"></script>
+<script src="app/components/new-list/new-list-module.js"></script>
+<script src="app/components/new-list/new-list-directive.js"></script>
+<script src="app/views/lists/lists.js"></script>
+<script src="app/views/home/home.js"></script>
 </body>
 </html>

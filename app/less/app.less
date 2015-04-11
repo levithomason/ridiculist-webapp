@@ -1,0 +1,38 @@
+@import "../bower/bootstrap/less/bootstrap.less";
+
+@import "variables";
+@import "mixins";
+
+/*====================================================
+  Customize Bootstrap
+ ====================================================*/
+
+@border-radius-base: 3px;
+
+@font-family-base: 'Open Sans', sans-serif;
+@body-bg: @lst-brand-secondary-dark;
+
+
+body {
+  background: url(http://subtlepatterns.com/patterns/geometry2.png);
+}
+
+.jumbotron {
+  color: mix(#ffffff, @lst-brand-primary, 90);
+  background: @lst-brand-primary;
+
+  h1 {
+    .lst-text-shadow(5px, @lst-brand-primary);
+    font-family: 'Lily Script One', cursive;
+  }
+}
+
+/*====================================================
+  Our Styles
+ ====================================================*/
+
+@import "../components/new-list/new-list";
+
+@import "../views/home/home";
+@import "../views/lists/lists";
+

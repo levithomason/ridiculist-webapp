@@ -1,0 +1,30 @@
+//
+// Text
+//
+.lst-text-shadow(@size, @bg) {
+  color: mix(#000, #FFF, 4);
+  text-shadow: 0 -1px #FFF, floor(@size * 0.5) @size mix(#000, @bg, 7);
+}
+
+//
+// Transitions
+//
+.lst-transition-props(@props...) {
+  transition-property: @props;
+  transition-timing-function: @lst-ease-out;
+}
+
+.lst-transition-slow(@props...) {
+  .lst-transition-props(@props);
+  transition-duration: @lst-transition-duration * 2;
+}
+
+.lst-transition(@props...) {
+  .lst-transition-props(@props);
+  transition-duration: @lst-transition-duration;
+}
+
+.lst-transition-fast(@props...) {
+  .lst-transition-props(@props);
+  transition-duration: @lst-transition-duration * 0.5;
+}
