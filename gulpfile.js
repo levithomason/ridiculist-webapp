@@ -5,11 +5,6 @@ var paths = {
     indexHtml: './index.html',
 };
 
-gulp.task('serve', function(cb) {
-    gulp.src('.')
-        .pipe($.webserver({
-            livereload: true,
-            open: false,
-            fallback: paths.indexHtml
-        }));
+gulp.task('heroku:production', function(cb) {
+    cb();
 });
