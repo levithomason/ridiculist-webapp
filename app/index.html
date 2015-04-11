@@ -11,6 +11,8 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="app.less">
+    <link rel="stylesheet" href="lists/app/bower_components/bootstrap/dist/css/bootstrap.css"/>
+    
     <script src="bower_components/less.js/dist/less.js"></script>
 </head>
 
@@ -21,7 +23,11 @@
     your browser</a> to improve your experience.</p>
 <![endif]-->
 
-<div ng-view></div>
+<div class="container">
+    <h1>Ridiculist</h1>
+
+    <div ng-view></div>
+</div>
 
 <!-- In production use:
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
@@ -36,6 +42,6 @@
 
 <!-- App -->
 <script src="app.js"></script>
-<script src="view1/view1.js"></script>
+<script src="lists/lists.js"></script>
 </body>
 </html>
