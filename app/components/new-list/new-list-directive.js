@@ -6,7 +6,10 @@ function newList() {
         scope: {},
         templateUrl: 'app/components/new-list/new-list.html',
         link: function(scope, elem, attrs) {
-            
+
+            scope.newClicked = function() {
+                elem.toggleClass('lst-show-form');
+            };
         }
     }
 }
