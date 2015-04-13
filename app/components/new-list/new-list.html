@@ -1,6 +1,19 @@
 <div class="lst-new-list">
-    <div class="lst-btn" ng-click="newClicked()">
-        <i class="ion-plus-round"></i>
-        Make a List
+    <div class="panel">
+        <div class="panel-body">
+            <form ng-submit="createList()" class="lst-new-list-form">
+                <div class="lst-input lst-input-title">
+                    <input type="text" placeholder="Title" class="lst-title-input" maxlength="32"/>
+                </div>
+
+                <div class="lst-radio" ng-repeat="type in listTypes" ng-class="{active: listType === type}">
+                    <label ng-click="setListType(type)">
+                        <i class="ion-android-radio-button-on" ng-show="listType === type"></i>
+                        <i class="ion-android-radio-button-off" ng-show="listType !== type"></i>
+                        {{ type }}
+                    </label>
+                </div>
+            </form>
+        </div>
     </div>
 </div>

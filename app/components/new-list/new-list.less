@@ -1,12 +1,4 @@
 .lst-new-list {
-  border-radius: @border-radius-base;
-  display: inline-block;
-  .lst-transition-fast(background, padding, margin;);
-  &.lst-show-form {
-    background: #FFF;
-    padding: 20px;
-    margin: 0;
-  }
 
   .lst-btn {
     .lst-transition(background;);
@@ -27,6 +19,52 @@
     }
     &:active {
       top: 1px;
+    }
+  }
+
+  //////////////////////////////////
+  // Form
+  .lst-new-list-form {
+    .lst-transition-fast(opacity;);
+    border-radius: @border-radius-base;
+    background: #FFF;
+    &.lst-show-form {
+    }
+
+    //////////////////////////////////
+    // Form controls
+
+    .lst-input {
+      &.lst-input-title {
+        font-size: 2em;
+        text-align: center;
+        width: 100%;
+        input {
+          text-align: inherit;
+          width: 100%;
+        }
+      }
+
+      input {
+        border: none;
+        border-radius: 0;
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+
+    .lst-radio {
+      .lst-transition(opacity;);
+      float: left;
+      padding-right: 1em;
+      &.active {
+        opacity: 1;
+        color: @lst-active-item-color;
+      }
+      label {
+        cursor: pointer;
+      }
     }
   }
 }

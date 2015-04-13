@@ -18,8 +18,12 @@ body {
 }
 
 .jumbotron {
-  color: mix(#FFF, @lst-brand-primary, 70);
   background: @lst-brand-primary;
+ 
+  h1, p {
+    text-align: center;
+    color: mix(#FFF, @lst-brand-primary, 70);
+  }
 
   h1 {
     .lst-text-shadow(5px, @lst-brand-primary);

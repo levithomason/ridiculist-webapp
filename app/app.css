@@ -6554,8 +6554,12 @@ body {
   background: url(http://subtlepatterns.com/patterns/geometry2.png);
 }
 .jumbotron {
-  color: #dceaf4;
   background: #8abadb;
+}
+.jumbotron h1,
+.jumbotron p {
+  text-align: center;
+  color: #dceaf4;
 }
 .jumbotron h1 {
   color: #f2f2f2;
@@ -6565,18 +6569,6 @@ body {
 /*====================================================
   Our Styles
  ====================================================*/
-.lst-new-list {
-  border-radius: 3px;
-  display: inline-block;
-  transition-property: background, padding, margin;
-  transition-timing-function: cubic-bezier(0.05, 0.99, 0.1, 1);
-  transition-duration: 0.3s;
-}
-.lst-new-list.lst-show-form {
-  background: #FFF;
-  padding: 20px;
-  margin: 0;
-}
 .lst-new-list .lst-btn {
   transition-property: background;
   transition-timing-function: cubic-bezier(0.05, 0.99, 0.1, 1);
@@ -6599,6 +6591,43 @@ body {
 }
 .lst-new-list .lst-btn:active {
   top: 1px;
+}
+.lst-new-list .lst-new-list-form {
+  transition-property: opacity;
+  transition-timing-function: cubic-bezier(0.05, 0.99, 0.1, 1);
+  transition-duration: 0.3s;
+  border-radius: 3px;
+  background: #FFF;
+}
+.lst-new-list .lst-new-list-form .lst-input.lst-input-title {
+  font-size: 2em;
+  text-align: center;
+  width: 100%;
+}
+.lst-new-list .lst-new-list-form .lst-input.lst-input-title input {
+  text-align: inherit;
+  width: 100%;
+}
+.lst-new-list .lst-new-list-form .lst-input input {
+  border: none;
+  border-radius: 0;
+}
+.lst-new-list .lst-new-list-form .lst-input input:focus {
+  outline: none;
+}
+.lst-new-list .lst-new-list-form .lst-radio {
+  transition-property: opacity;
+  transition-timing-function: cubic-bezier(0.05, 0.99, 0.1, 1);
+  transition-duration: 0.5s;
+  float: left;
+  padding-right: 1em;
+}
+.lst-new-list .lst-new-list-form .lst-radio.active {
+  opacity: 1;
+  color: lightblue;
+}
+.lst-new-list .lst-new-list-form .lst-radio label {
+  cursor: pointer;
 }
 .lst-public-lists .panel {
   color: #333333;
