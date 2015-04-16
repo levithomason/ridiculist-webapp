@@ -1076,7 +1076,7 @@ body {
   font-size: 14px;
   line-height: 1.42857143;
   color: #333333;
-  background-color: #98949e;
+  background-color: transparent;
 }
 input,
 button,
@@ -1121,7 +1121,7 @@ img {
 .img-thumbnail {
   padding: 4px;
   line-height: 1.42857143;
-  background-color: #98949e;
+  background-color: transparent;
   border: 1px solid #dddddd;
   border-radius: 3px;
   -webkit-transition: all 0.2s ease-in-out;
@@ -2271,7 +2271,7 @@ th {
   border-top: 2px solid #dddddd;
 }
 .table .table {
-  background-color: #98949e;
+  background-color: transparent;
 }
 .table-condensed > thead > tr > th,
 .table-condensed > tbody > tr > th,
@@ -3917,7 +3917,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav-tabs > li.active > a:hover,
 .nav-tabs > li.active > a:focus {
   color: #555555;
-  background-color: #98949e;
+  background-color: transparent;
   border: 1px solid #dddddd;
   border-bottom-color: transparent;
   cursor: default;
@@ -3963,7 +3963,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   .nav-tabs.nav-justified > .active > a,
   .nav-tabs.nav-justified > .active > a:hover,
   .nav-tabs.nav-justified > .active > a:focus {
-    border-bottom-color: #98949e;
+    border-bottom-color: transparent;
   }
 }
 .nav-pills > li {
@@ -4031,7 +4031,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   .nav-tabs-justified > .active > a,
   .nav-tabs-justified > .active > a:hover,
   .nav-tabs-justified > .active > a:focus {
-    border-bottom-color: #98949e;
+    border-bottom-color: transparent;
   }
 }
 .tab-content > .tab-pane {
@@ -4875,7 +4875,7 @@ a.badge:focus {
   padding: 4px;
   margin-bottom: 20px;
   line-height: 1.42857143;
-  background-color: #98949e;
+  background-color: transparent;
   border: 1px solid #dddddd;
   border-radius: 3px;
   -webkit-transition: border 0.2s ease-in-out;
@@ -6550,21 +6550,39 @@ button.close {
 /*====================================================
   Customize Bootstrap
  ====================================================*/
+html {
+  position: relative;
+  min-height: 100%;
+  background: #808080;
+}
 body {
-  background: url(http://subtlepatterns.com/patterns/geometry2.png);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url(https://unsplash.it/1200/1200/?random&blur);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.container {
+  background: rgba(0, 0, 0, 0.5);
+}
+.container .page-header {
+  color: white;
 }
 .jumbotron {
-  background: #8abadb;
+  background: transparent;
+}
+.jumbotron .container {
+  background: none;
+}
+.jumbotron h1 {
+  font-family: 'Lily Script One', cursive;
 }
 .jumbotron h1,
 .jumbotron p {
+  text-shadow: 2px 4px rgba(0, 0, 0, 0.5);
+  color: #FFF;
   text-align: center;
-  color: #dceaf4;
-}
-.jumbotron h1 {
-  color: #f2f2f2;
-  text-shadow: 0 -1px #ffffff, 0 -2px #ffffff, 2px 5px #80adcc;
-  font-family: 'Lily Script One', cursive;
 }
 /*====================================================
   Our Styles
