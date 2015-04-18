@@ -9,12 +9,18 @@ var paths = {
     views: './app/views/',
 };
 
+function handleError(err) {
+    console.log(err.toString());
+    this.emit('end');
+}
+
 gulp.task('build-less', function(cb) {
     return gulp.src([
         paths.less + 'app.less'
     ])
+        .pipe($.plumber(handleError))
         .pipe($.less())
-        .pipe(gulp.dest(paths.app))
+        .pipe(gulp.dest(paths.app));
 });
 
 gulp.task('watch', function(cb) {

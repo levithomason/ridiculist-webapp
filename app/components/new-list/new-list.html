@@ -1,19 +1,17 @@
-<div class="lst-new-list">
-    <div class="panel">
-        <div class="panel-body">
-            <form ng-submit="createList()" class="lst-new-list-form">
-                <div class="lst-input lst-input-title">
-                    <input type="text" placeholder="Title" class="lst-title-input" maxlength="32"/>
-                </div>
+<div class="lst-new-list-wrapper">
+    <div class="lst-new-list-backdrop"></div>
 
-                <div class="lst-radio" ng-repeat="type in listTypes" ng-class="{active: listType === type}">
-                    <label ng-click="setListType(type)">
-                        <i class="ion-android-radio-button-on" ng-show="listType === type"></i>
-                        <i class="ion-android-radio-button-off" ng-show="listType !== type"></i>
-                        {{ type }}
-                    </label>
-                </div>
-            </form>
+    <form ng-submit="createList()" class="lst-new-list-form">
+        <div class="lst-input lst-input-title">
+            <input type="text" placeholder="{{ listType }} list title" class="lst-title-input" maxlength="24" autofocus="autofocus"/>
         </div>
-    </div>
+
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" value="" id="">
+                Feature on homepage
+            </label>
+        </div>
+
+    </form>
 </div>

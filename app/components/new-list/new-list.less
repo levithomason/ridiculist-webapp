@@ -1,69 +1,68 @@
-.lst-new-list {
+//////////////////////////////////
+// Wrapper
+.lst-new-list-wrapper {
 
-  .lst-btn {
-    .lst-transition(background;);
-    position: relative;
-    display: inline-block;
-    padding: 7px 16px;
-    top: 0;
-    color: #FFF;
-    background: lighten(@lst-brand-secondary, 5);
-    border: 2px solid darken(@lst-brand-secondary, 10);
-    border-left-width: 1px;
-    border-top-width: 1px;
-    border-radius: @border-radius-base;
-    cursor: pointer;
-    &:hover {
-      text-decoration: none;
-      background: @lst-brand-secondary;
+  &.active {
+    .lst-new-list-backdrop {
+      opacity: 0.85;
+      pointer-events: all;
     }
-    &:active {
-      top: 1px;
+
+    .lst-new-list-form {
+      transform: translate(0, 0);
+      opacity: 1;
     }
   }
+}
 
-  //////////////////////////////////
-  // Form
-  .lst-new-list-form {
-    .lst-transition-fast(opacity;);
-    border-radius: @border-radius-base;
-    background: #FFF;
-    &.lst-show-form {
-    }
+//////////////////////////////////
+// Backdrop
+.lst-new-list-backdrop {
+  .lst-transition-slow(opacity);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: fade(#000, 80);
+  opacity: 0;
+  pointer-events: none;
+}
 
-    //////////////////////////////////
-    // Form controls
+//////////////////////////////////
+// Form
+.lst-new-list-form {
+  .lst-transition(opacity, transform;);
+  position: fixed;
+  width: 100%;
+  max-width: 400px;
+  top: 10%;
+  margin: auto;
+  left: 0;
+  right: 0;
+  transform: translate(0, -60px);
+  opacity: 0;
+  border-radius: @border-radius-base;
+  background: #FFF;
 
-    .lst-input {
-      &.lst-input-title {
-        font-size: 2em;
-        text-align: center;
-        width: 100%;
-        input {
-          text-align: inherit;
-          width: 100%;
-        }
-      }
-
+  //
+  // Form controls
+  .lst-input {
+    &.lst-input-title {
+      font-size: 2em;
+      text-align: center;
+      width: 100%;
       input {
-        border: none;
-        border-radius: 0;
-        &:focus {
-          outline: none;
-        }
+        text-align: inherit;
+        width: 100%;
       }
     }
 
-    .lst-radio {
-      .lst-transition(opacity;);
-      float: left;
-      padding-right: 1em;
-      &.active {
-        opacity: 1;
-        color: @lst-active-item-color;
-      }
-      label {
-        cursor: pointer;
+    input {
+      border: none;
+      border-radius: 0;
+      &:focus {
+        outline: none;
       }
     }
   }

@@ -1,3 +1,8 @@
+.lst-new-btns-wrapper {
+  padding: 3em 0;
+  background: fade(#000, 50);
+}
+
 .lst-public-lists {
   .panel {
     color: @text-color;
@@ -5,5 +10,18 @@
     &:hover {
       border-color: @lst-brand-primary;
     }
+  }
+}
+
+
+.btn {
+  .lst-transition-fast(transform;);
+  
+  &:hover {
+    transform: scale(1.03);
+  }
+  
+  &:active {
+    transform: scale(0.98) translate(0, 1px);
   }
 }
