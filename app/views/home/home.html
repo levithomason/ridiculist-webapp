@@ -1,32 +1,36 @@
 <div class="lst-new-btns-wrapper">
     <div class="container">
         <div class="row">
-            <div class="col-xs-4">
-                <div class="btn btn-lg btn-block btn-primary" ng-click="newList('todo')">
-                    <i class="ion-android-checkbox"></i>
-                    Todo
-                </div>
-            </div>
-            <div class="col-xs-4">
-                <div class="btn btn-lg btn-block btn-primary" ng-click="newList('vote')">
-                    <i class="ion-thumbsup"></i>
-                    Vote
-                </div>
-            </div>
-            <div class="col-xs-4">
-                <div class="btn btn-lg btn-block btn-primary" ng-click="newList('survey')">
-                    <i class="ion-ios-information"></i>
-                    Survey
+            <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+
+                <div class="row">
+                    <div class="col-xs-4">
+                        <div class="btn btn-lg btn-block btn-default" ng-click="newList('todo')">
+                            <i class="ion-android-checkbox"></i>
+                            Todo
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="btn btn-lg btn-block btn-default" ng-click="newList('vote')">
+                            <i class="ion-thumbsup"></i>
+                            Vote
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="btn btn-lg btn-block btn-default" ng-click="newList('survey')">
+                            <i class="ion-ios-information"></i>
+                            Survey
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="container">
-    <h2 class="page-header">Public Lists</h2>
-
-    <div class="lst-public-lists">
+<div class="lst-public-lists-wrapper">
+    <div class="container">
+        <h2 class="page-header">Public Lists</h2>
 
         <div class="row">
             <div class="col-sm-6 col-md-4 col-lg-3" ng-repeat="(listId, listData) in lists">
@@ -45,6 +49,5 @@
                 </a>
             </div>
         </div>
-
     </div>
 </div>
