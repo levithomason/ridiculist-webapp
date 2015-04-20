@@ -19,6 +19,10 @@ function newListItem() {
                 sort: scope.sort,
                 type: scope.type,
                 value: scope.value
+            };
+            
+            scope.onChange = function() {
+                $rootScope.$broadcast('lst:newList:itemChanged', scope.item);
             }
         }
     }

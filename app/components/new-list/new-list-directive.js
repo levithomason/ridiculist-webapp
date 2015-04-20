@@ -75,6 +75,10 @@ function newList($rootScope) {
                 scope.items.splice(index)
             };
 
+            scope.onItemChange = function(item) {
+                
+            };
+
             // 
             // Events
             // 
@@ -102,6 +106,10 @@ function newList($rootScope) {
 
             $rootScope.$on('lst:newList:setType', function(event, type) {
                 scope.setType(type);
+            });
+
+            $rootScope.$on('lst:newList:itemChanged', function(event, item) {
+                scope.onItemChange(item);
             });
 
             //
