@@ -1,4 +1,5 @@
 'use strict';
+
 function newList($rootScope) {
     return {
         restrict: 'E',
@@ -11,17 +12,33 @@ function newList($rootScope) {
             var backdrop = angular.element(document.getElementsByClassName('lst-new-list-backdrop'));
             var form = angular.element(document.getElementsByClassName('lst-new-list-form'));
             var title = angular.element(document.getElementsByClassName('lst-title-input'));
-            
-            scope.listType = 'todo';
 
-            scope.createList = function() {
+            scope.init = function() {
+                scope.list = {
+                    type: 'todo',
+                    security: 'public',
+                };
                 
+                scope.items = [];
+                scope.addItem();
+                scope.show();
             };
 
-            scope.setListType = function(type) {
-                scope.listType = type;
+
+            //
+            // List
+            //
+
+            scope.setType = function(type) {
+                scope.list.type = type;
             };
-            
+
+            scope.toggleFeatured = function() {
+                var isPublic = scope.list.security === 'public';
+
+                scope.list.security = isPublic ? 'link' : 'public';
+            };
+
             scope.show = function() {
                 wrapper.addClass('active');
                 title[0].focus();
@@ -29,6 +46,33 @@ function newList($rootScope) {
 
             scope.hide = function() {
                 wrapper.removeClass('active');
+            };
+
+            scope.createList = function() {
+
+            };
+
+            //
+            // Items
+            //
+
+            scope.addItem = function(item) {
+                item = item || {};
+                item.name = item.name || '';
+                item.sort = item.sort || 0;
+                item.type = item.type || scope.list.type;
+                item.value = item.value || '';
+
+                scope.items.push({
+                    name: item.name,
+                    sort: item.sort,
+                    type: item.type,
+                    value: item.value,
+                });
+            };
+
+            scope.removeItem = function(index) {
+                scope.items.splice(index)
             };
 
             // 
@@ -46,7 +90,7 @@ function newList($rootScope) {
                         console.log('keycode is 27');
                         scope.hide();
                         break;
-                 
+
                     default:
                         break;
                 }
@@ -55,28 +99,19 @@ function newList($rootScope) {
             $rootScope.$on('lst:newList:show', function() {
                 scope.show();
             });
-            
-            $rootScope.$on('lst:newList:setType', function(event, type) {
-                scope.setListType(type);
-            });
-        }
-    }
-}
 
-function newListButton() {
-    return {
-        restrict: 'E',
-        replace: true,
-        scope: {},
-        templateUrl: 'app/components/new-list-button/new-list-button.html',
-        link: function(scope, elem, attrs) {
-            scope.newClicked = function() {
-                $rootScope.$broadcast('lst-new-list-button-clicked');
-            };
+            $rootScope.$on('lst:newList:setType', function(event, type) {
+                scope.setType(type);
+            });
+
+            //
+            // Init
+            //
+
+            scope.init();
         }
     }
 }
 
 angular.module('App.newList')
-    .directive('newList', newList)
-    .directive('newListButton', newListButton);
+    .directive('newList', newList);

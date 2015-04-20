@@ -20,6 +20,8 @@ gulp.task('build-less', function(cb) {
     ])
         .pipe($.plumber(handleError))
         .pipe($.less())
+        .pipe($.autoprefixer())
+        .pipe($.minifyCss({keepSpecialComments: 0}))
         .pipe(gulp.dest(paths.app));
 });
 

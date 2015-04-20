@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="app/bower/ionicons/css/ionicons.css"/>
     <link href="//fonts.googleapis.com/css?family=Lily+Script+One|Open+Sans:400,700" rel="stylesheet" type="text/css">
 
-    <script src="app/bower/less.js/dist/less.js"></script>
     <script src="//localhost:35729/livereload.js"></script>
 </head>
 
@@ -25,8 +24,6 @@
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
     your browser</a> to improve your experience.</p>
 <![endif]-->
-
-<div class="lst-top-bar"></div>
 
 <div class="jumbotron">
     <div class="container">
@@ -41,9 +38,9 @@
     </div>
 </div>
 
-<div ng-view></div>
-
 <new-list></new-list>
+
+<div ng-view></div>
 
 <!-- Angular -->
 <script src="app/bower/angular/angular.js"></script>
@@ -56,6 +53,7 @@
 <!-- App -->
 <script src="app/app.js"></script>
 <script src="app/components/new-list/new-list-module.js"></script>
+<script src="app/components/new-list/new-list-item-directive.js"></script>
 <script src="app/components/new-list/new-list-directive.js"></script>
 <script src="app/views/list/list.js"></script>
 <script src="app/views/home/home.js"></script>

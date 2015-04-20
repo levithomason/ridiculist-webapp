@@ -1,76 +1,21 @@
 @import "../bower/bootstrap/less/bootstrap.less";
+
+// Base
 @import "variables";
 @import "mixins";
+@import "animations";
 
-//
-// Animations
-//
+// Styles
+@import "base";
+@import "jumbotron";
+@import "buttons";
+@import "form-controls";
 
-@-webkit-keyframes colorWheel {
-  0% {
-    background-color: lighten(desaturate(#F00, 85), 10);
-  }
-  33% {
-    background-color: lighten(desaturate(#0F0, 85), 10);
-  }
-  66% {
-    background-color: lighten(desaturate(#00F, 85), 10);
-  }
-  100% {
-    background-color: lighten(desaturate(#F00, 85), 10);
-  }
-}
+// Components
+@import "../components/new-list/new-list-form";
+@import "../components/new-list/new-list-item";
 
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-body {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-image: url(https://unsplash.it/800/600/?random);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-blend-mode: soft-light;
-  animation: colorWheel 20s infinite linear;
-  -webkit-animation: colorWheel 20s infinite linear;
-}
-
-.lst-top-bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  animation: colorWheel 20s infinite linear;
-  -webkit-animation: colorWheel 20s infinite linear;
-}
-.jumbotron {
-  background: transparent;
-  text-align: center;
-  color: #FFF;
-  padding: 80px 0;
-
-  h1 {
-    font-family: 'Lily Script One', cursive;
-    text-shadow: 3px 5px fade(#000, 50);
-  }
-
-  p {
-    text-shadow: 2px 3px fade(#000, 50);
-  }
-}
-
-/*====================================================
-  Our Styles
- ====================================================*/
-
-@import "../components/new-list/new-list";
-
+// Views
 @import "../views/home/home";
 @import "../views/list/list";
 

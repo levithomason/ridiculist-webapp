@@ -1,0 +1,51 @@
+.lst-new-list-form {
+  padding: 20px;
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+  border-radius: @border-radius-base;
+  background: #FFF;
+  
+  .lst-new-list-section {
+    margin-bottom: 20px;
+  }
+
+  .lst-title {
+    input {
+      font-size: 2em;
+      text-align: center;
+      &:not(:focus) {
+        border-color: transparent;
+      }
+    }
+  }
+
+  //
+  // List Type
+  .lst-new-list-type {
+    text-align: center;
+
+    .lst-type {
+      .lst-transition(color, opacity;);
+      display: inline-block;
+      color: @gray-light;
+      font-size: 1.2em;
+      opacity: 0.5;
+      cursor: pointer;
+      &:hover {
+        opacity: 1;
+      }
+      &.active {
+        opacity: 1;
+        color: @brand-primary;
+      }
+    }
+  }
+
+  .lst-new-list-save {
+    &:hover {
+      background: @gray-lighter;
+      color: @brand-primary;
+    }
+  }
+}

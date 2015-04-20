@@ -1,0 +1,26 @@
+.lst-form-control {
+  width: 100%;
+
+  input {
+    .lst-transition(border-color;);
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid @gray-lighter;
+    &:focus {
+      outline: none;
+      border-bottom-color: @brand-primary;
+    }
+  }
+}
+
+button {
+  background: none;
+  border: none;
+}
+
+input, button, a {
+  &:focus {
+    outline: 1px dotted;
+    outline-offset: 0;
+  }
+}
