@@ -1,6 +1,6 @@
 'use strict';
 
-function newList($rootScope, $timeout) {
+function newList($rootScope, $timeout, $firebaseArray, FIREBASE_ROOT) {
     return {
         restrict: 'E',
         replace: true,
@@ -49,7 +49,15 @@ function newList($rootScope, $timeout) {
             };
 
             scope.createList = function() {
+                var listRef = new Firebase(FIREBASE_ROOT + 'lists/');
+                var lists = $firebaseArray(listRef);
 
+                lists.$add(scope.list)
+                    .then(function(newList) {
+                        scope.listId = newList.key();
+                    }, function(error) {
+                        console.error(error);
+                    });
             };
 
             //
@@ -89,7 +97,7 @@ function newList($rootScope, $timeout) {
                         totalBlank += isBlank ? 1 : 0;
 
                         if (isBlank && !isLast) {
-                            scope.focusItem(i+1);
+                            scope.focusItem(i + 1);
                             arr.splice(i, 1);
                         }
 
