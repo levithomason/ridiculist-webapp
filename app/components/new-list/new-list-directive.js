@@ -1,6 +1,6 @@
 'use strict';
 
-function newList($rootScope) {
+function newList($rootScope, $timeout) {
     return {
         restrict: 'E',
         replace: true,
@@ -18,7 +18,7 @@ function newList($rootScope) {
                     type: 'todo',
                     security: 'public',
                 };
-                
+
                 scope.items = [];
                 scope.addItem();
                 scope.show();
@@ -63,20 +63,42 @@ function newList($rootScope) {
                 item.type = item.type || scope.list.type;
                 item.value = item.value || '';
 
-                scope.items.push({
-                    name: item.name,
-                    sort: item.sort,
-                    type: item.type,
-                    value: item.value,
-                });
+                scope.items.push(item);
             };
 
             scope.removeItem = function(index) {
                 scope.items.splice(index)
             };
 
-            scope.onItemChange = function(item) {
-                
+            scope.focusItem = function(index) {
+                var focusInput = document.getElementsByClassName('lst-new-list-item-input')[index]
+                if (focusInput) {
+                    focusInput.focus();
+                }
+            };
+
+            scope.onItemChange = function(itemScope) {
+
+                $timeout(function() {
+                    var totalBlank = 0;
+
+                    scope.items.forEach(function(item, i, arr) {
+                        var isBlank = item.name.trim().length === 0;
+                        var isLast = i === arr.length - 1;
+
+                        totalBlank += isBlank ? 1 : 0;
+
+                        if (isBlank && !isLast) {
+                            scope.focusItem(i+1);
+                            arr.splice(i, 1);
+                        }
+
+                    });
+
+                    if (totalBlank === 0) {
+                        scope.addItem();
+                    }
+                }, 0);
             };
 
             // 
@@ -110,6 +132,10 @@ function newList($rootScope) {
 
             $rootScope.$on('lst:newList:itemChanged', function(event, item) {
                 scope.onItemChange(item);
+            });
+
+            $rootScope.$on('lst:newList:focusItemIndex', function(event, itemIndex) {
+                scope.focusItem(itemIndex);
             });
 
             //

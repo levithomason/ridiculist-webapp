@@ -1,10 +1,9 @@
 'use strict';
 
-function newListItem() {
+function newListItem($rootScope) {
     return {
         restrict: 'E',
         replace: true,
-        require: '^newList',
         scope: {
             name: '=',
             sort: '=',
@@ -13,16 +12,26 @@ function newListItem() {
             index: '='
         },
         templateUrl: 'app/components/new-list/new-list-item.html',
-        link: function(scope, elem, attrs, newListCtrl) {
-            scope.item = {
-                name: scope.name,
-                sort: scope.sort,
-                type: scope.type,
-                value: scope.value
+        link: function(scope, elem, attrs) {
+            scope.toggle = function() {
+                scope.value = !scope.value;
+            };
+
+            scope.onChange = function() {
+                $rootScope.$broadcast('lst:newList:itemChanged', scope);
             };
             
-            scope.onChange = function() {
-                $rootScope.$broadcast('lst:newList:itemChanged', scope.item);
+            scope.onKeydown = function(e) {
+                switch (e.keyCode) {
+                    // enter
+                    case 13:
+                        var offset = e.shiftKey ? -1 : 1;
+                        $rootScope.$broadcast('lst:newList:focusItemIndex', scope.index + offset);
+                        break;
+                    
+                    default:
+                        break;
+                }
             }
         }
     }

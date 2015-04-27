@@ -1,17 +1,28 @@
-<div class="lst-new-list-item">
-    <div class="lst-form-control-icon">
-        <div class="lst-vote-item-control" ng-show="type === 'vote'">
-            <i class="ion-thumbsup"></i>
-        </div>
+<div class="lst-new-list-item" ng-class="{'active': value}">
+    {{ item }}
+    <div class="lst-form-control-icon" ng-click="toggle()">
         <div class="lst-todo-item-control" ng-show="type === 'todo'">
-            <i class="ion-android-checkbox-outline-blank"></i>
+            <i ng-hide="value" class="ion-android-checkbox-outline-blank"></i>
+            <i ng-show="value" class="ion-android-checkbox-outline"></i>
         </div>
+
+        <div class="lst-vote-item-control" ng-show="type === 'vote'">
+            <i ng-show="value" class="ion-android-star"></i>
+            <i ng-hide="value" class="ion-android-star-outline"></i>
+        </div>
+
         <div class="lst-survey-item-control" ng-show="type === 'survey'">
-            <i class="ion-android-radio-button-off"></i>
+            <i ng-show="value" class="ion-android-radio-button-on"></i>
+            <i ng-hide="value" class="ion-android-radio-button-off"></i>
         </div>
     </div>
-    
+
     <div class="lst-form-control">
-        <input type="text" ng-model="name" placeholder="item {{index + 1}}" ng-change="onChange()"/>
+        <input type="text"
+               class="lst-new-list-item-input"
+               placeholder="Add item"
+               ng-model="name" 
+               ng-keydown="onKeydown($event)"
+               ng-change="onChange()"/>
     </div>
 </div>

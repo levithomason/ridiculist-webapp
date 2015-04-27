@@ -1,18 +1,18 @@
 <form ng-submit="createList()" class="lst-new-list-form">
-    <div class="lst-new-list-section">
+    <div class="lst-new-list-heading">
         <div class="lst-form-control lst-title">
             <input type="text" placeholder="title" class="lst-title-input" maxlength="24" autofocus="autofocus"/>
         </div>
     </div>
 
-    <div class="lst-new-list-section">
+    <div class="lst-new-list-types">
         <div class="lst-new-list-type">
             <div class="row">
                 <div class="col-xs-4">
                     <button class="lst-type lst-todo"
                             ng-class="{active: list.type === 'todo'}"
                             ng-click="setType('todo')">
-                        <i class="ion-android-checkbox"></i>
+                        <i class="ion-android-checkbox-outline"></i>
                         todo
                     </button>
                 </div>
@@ -20,7 +20,7 @@
                     <button class="lst-type lst-vote"
                             ng-class="{active: list.type === 'vote'}"
                             ng-click="setType('vote')">
-                        <i class="ion-thumbsup"></i>
+                        <i class="ion-android-star-outline"></i>
                         vote
                     </button>
                 </div>
@@ -28,7 +28,7 @@
                     <button class="lst-type lst-survey"
                             ng-class="{active: list.type === 'survey'}"
                             ng-click="setType('survey')">
-                        <i class="ion-information-circled"></i>
+                        <i class="ion-android-radio-button-on"></i>
                         survey
                     </button>
                 </div>
@@ -36,7 +36,7 @@
         </div>
     </div>
 
-    <div class="lst-new-list-section">
+    <div class="lst-new-list-items">
         <new-list-item ng-repeat="item in items"
                        index="$index"
                        name="item.name"
@@ -46,9 +46,9 @@
         </new-list-item>
     </div>
 
-    <div class="lst-new-list-section">
-        <a href="#" target="_parent" ng-click="toggleFeatured()" ng-show="list.security === 'public'">Show</a>
-        <a href="#" target="_parent" ng-click="toggleFeatured()" ng-show="list.security === 'link'">Don't show</a>
+    <div class="lst-new-list-options">
+        <a href="" target="_parent" ng-click="toggleFeatured()" ng-show="list.security === 'public'">Show</a>
+        <a href="" target="_parent" ng-click="toggleFeatured()" ng-show="list.security === 'link'">Hide</a>
         this on ridiculi.st
     </div>
 

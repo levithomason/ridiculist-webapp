@@ -1,17 +1,25 @@
 .lst-new-list-item {
   position: relative;
   font-size: 1.2em;
+  margin-bottom: 0.5em;
 
+  &.active {
+    .lst-form-control-icon {
+      color: @lst-brand-primary;
+    }  
+  }
+  
   .lst-form-control-icon {
     position: absolute;
     left: 0;
-    top: 0.1em;
     color: @gray-light;
     cursor: pointer;
+    user-select: none;
+    font-size: 1.2em;
   }
-  
+
   .lst-form-control {
-    margin-left: 1.2em;
+    padding-left: 2em;
     input {
       width: 100%;
     }
