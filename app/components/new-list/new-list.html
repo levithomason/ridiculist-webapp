@@ -9,7 +9,7 @@
         <div class="lst-new-list-type">
             <div class="row">
                 <div class="col-xs-4">
-                    <button class="lst-type lst-todo"
+                    <button type="button" class="lst-type lst-todo"
                             ng-class="{active: list.type === 'todo'}"
                             ng-click="setType('todo')">
                         <i class="ion-android-checkbox-outline"></i>
@@ -17,7 +17,7 @@
                     </button>
                 </div>
                 <div class="col-xs-4">
-                    <button class="lst-type lst-vote"
+                    <button type="button" class="lst-type lst-vote"
                             ng-class="{active: list.type === 'vote'}"
                             ng-click="setType('vote')">
                         <i class="ion-android-star-outline"></i>
@@ -25,7 +25,7 @@
                     </button>
                 </div>
                 <div class="col-xs-4">
-                    <button class="lst-type lst-survey"
+                    <button type="button" class="lst-type lst-survey"
                             ng-class="{active: list.type === 'survey'}"
                             ng-click="setType('survey')">
                         <i class="ion-android-radio-button-on"></i>
@@ -52,7 +52,7 @@
         this on ridiculi.st
     </div>
 
-    <button class="lst-new-list-save btn btn-block btn-lg">
+    <button type="submit" class="lst-new-list-save btn btn-block btn-lg">
         Save
     </button>
 </form>

@@ -71,7 +71,7 @@ function newList($rootScope, $timeout) {
             };
 
             scope.focusItem = function(index) {
-                var focusInput = document.getElementsByClassName('lst-new-list-item-input')[index]
+                var focusInput = document.getElementsByClassName('lst-new-list-item-input')[index];
                 if (focusInput) {
                     focusInput.focus();
                 }
