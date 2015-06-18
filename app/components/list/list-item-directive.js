@@ -1,24 +1,25 @@
 'use strict';
 
-function newListItem($rootScope) {
+function listItem($rootScope) {
     return {
         restrict: 'E',
         replace: true,
         scope: {
+            disable: '=',
             name: '=',
             sort: '=',
             type: '=',
             value: '=',
             index: '='
         },
-        templateUrl: 'app/components/new-list/new-list-item.html',
+        templateUrl: 'app/components/list/list-item.html',
         link: function(scope, elem, attrs) {
             scope.toggle = function() {
                 scope.value = !scope.value;
             };
 
             scope.onChange = function() {
-                $rootScope.$broadcast('lst:newList:itemChanged', scope);
+                $rootScope.$broadcast('lst:list:itemChanged', scope);
             };
             
             scope.onKeydown = function(e) {
@@ -26,7 +27,7 @@ function newListItem($rootScope) {
                     // enter
                     case 13:
                         var offset = e.shiftKey ? -1 : 1;
-                        $rootScope.$broadcast('lst:newList:focusItemIndex', scope.index + offset);
+                        $rootScope.$broadcast('lst:list:focusItemIndex', scope.index + offset);
                         break;
                     
                     default:
@@ -37,5 +38,5 @@ function newListItem($rootScope) {
     }
 }
 
-angular.module('App.newList')
-    .directive('newListItem', newListItem);
+angular.module('App')
+    .directive('listItem', listItem);

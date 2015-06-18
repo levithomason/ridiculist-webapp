@@ -5,42 +5,55 @@
 <html lang="en" ng-app="App" class="no-js"> <!--<![endif]-->
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>ridiculist</title>
-    <meta name="description" content="Ridiculously simple lists, for everything.">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>ridiculist</title>
+  <base href="/index.html">
+  <meta name="description" content="Ridiculously simple lists, for everything.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="app/app.css">
-    <link rel="stylesheet" href="app/bower/ionicons/css/ionicons.css"/>
-    <link href="//fonts.googleapis.com/css?family=Lily+Script+One|Open+Sans:400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="app/app.css">
+  <link rel="stylesheet" href="app/bower/ionicons/css/ionicons.css"/>
+  <link href="//fonts.googleapis.com/css?family=Lily+Script+One|Open+Sans:400,700" rel="stylesheet" type="text/css">
 
-    <script src="//localhost:35729/livereload.js"></script>
+  <script src="//localhost:35729/livereload.js"></script>
 </head>
 
-<body>
+<body ng-controller="AppController">
 
 <!--[if lt IE 7]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
-    your browser</a> to improve your experience.</p>
+  your browser</a> to improve your experience.</p>
 <![endif]-->
 
 <div class="jumbotron">
-    <div class="container">
-        <h1>
-            <i class="ion-android-list"></i>
-            ridiculist
-        </h1>
+  <div class="container">
+    <h1>
+      <a href="/">
+        <i class="ion-android-list"></i>
+        ridiculist
+      </a>
+    </h1>
 
-        <p class="lead">
-            Free lists for everyone, for anything.
-        </p>
-    </div>
+    <p class="lead">
+      Free lists for everyone, for anything.
+    </p>
+  </div>
 </div>
 
-<new-list></new-list>
+<ng-view></ng-view>
 
-<div ng-view></div>
+<div class="lst-public-lists-wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 col-md-4 col-lg-3" ng-repeat="(listId, listData) in lists">
+        <div class="list-group">
+          <a ng-href="{{ listId }}" class="list-group-item">{{ listData.title }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Angular -->
 <script src="app/bower/angular/angular.js"></script>
@@ -50,12 +63,14 @@
 <script src="app/bower/firebase/firebase.js"></script>
 <script src="app/bower/angularfire/dist/angularfire.js"></script>
 
+<!-- Deps -->
+<script src="app/bower/zeroclipboard/dist/ZeroClipboard.js"></script>
+<script src="app/bower/ng-clip/src/ngClip.js"></script>
+
 <!-- App -->
 <script src="app/app.js"></script>
-<script src="app/components/new-list/new-list-module.js"></script>
-<script src="app/components/new-list/new-list-item-directive.js"></script>
-<script src="app/components/new-list/new-list-directive.js"></script>
-<script src="app/views/list/list.js"></script>
 <script src="app/views/home/home.js"></script>
+<script src="app/components/list/list-item-directive.js"></script>
+<script src="app/components/list/list-directive.js"></script>
 </body>
 </html>
