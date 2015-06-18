@@ -1,4 +1,4 @@
-<form ng-submit="createList()" class="lst-new-list-form">
+<form class="lst-new-list-form">
     <div class="lst-new-list-heading">
         <div class="lst-form-control lst-title">
             <input type="text" ng-model="list.title" placeholder="title" class="lst-title-input" maxlength="24" autofocus="autofocus"/>
@@ -52,12 +52,10 @@
         this on ridiculi.st
     </div>
 
-    <button type="submit" class="lst-new-list-save btn btn-block btn-lg" ng-hide="listId">
+    <button type="button" 
+            class="lst-new-list-save btn btn-block btn-lg" 
+            ng-click="createList()">
         Save
     </button>
-    
-    <div class="text-center" ng-show="listId">
-        List id: <span class="text-primary">{{ listId }}</span>
-    </div>
 </form>
 

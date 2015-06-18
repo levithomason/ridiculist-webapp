@@ -55,7 +55,18 @@ function newList($rootScope, $timeout, $firebaseArray, FIREBASE_ROOT) {
                 lists.$add(scope.list)
                     .then(function(newList) {
                         scope.listId = newList.key();
-                    }, function(error) {
+                      
+                        var itemRef = new Firebase(FIREBASE_ROOT + 'items/' + scope.listId);
+                        var items = $firebaseArray(itemRef);
+
+                        angular.forEach(scope.items, function(item, i, arr) {
+                            items.$add(item)
+                                .then(function() {
+
+                                })
+                        });
+                    })
+                    .catch(function(error) {
                         console.error(error);
                     });
             };
