@@ -1,8 +1,13 @@
 <form class="lst-list-form">
   <div class="lst-list-heading">
     <div class="lst-form-control lst-title">
-      <input ng-disabled="listId" type="text" ng-model="list.title" placeholder="title" class="lst-title-input"
-             maxlength="24" autofocus="autofocus"/>
+      <input ng-disabled="listId"
+             type="text"
+             ng-model="list.title"
+             placeholder="title"
+             class="lst-title-input"
+             maxlength="24"
+             autofocus="autofocus"/>
     </div>
   </div>
 
@@ -10,7 +15,8 @@
     <div class="lst-list-type">
       <div class="row">
         <div class="col-xs-4">
-          <button type="button" class="lst-type lst-todo"
+          <button type="button"
+                  class="lst-type lst-todo"
                   ng-class="{active: list.type === 'todo'}"
                   ng-click="setType('todo')">
             <i class="ion-android-checkbox-outline"></i>
@@ -18,7 +24,8 @@
           </button>
         </div>
         <div class="col-xs-4">
-          <button type="button" class="lst-type lst-vote"
+          <button type="button"
+                  class="lst-type lst-vote"
                   ng-class="{active: list.type === 'vote'}"
                   ng-click="setType('vote')">
             <i class="ion-android-star-outline"></i>
@@ -26,7 +33,8 @@
           </button>
         </div>
         <div class="col-xs-4">
-          <button type="button" class="lst-type lst-survey"
+          <button type="button"
+                  class="lst-type lst-survey"
                   ng-class="{active: list.type === 'survey'}"
                   ng-click="setType('survey')">
             <i class="ion-android-radio-button-on"></i>
@@ -44,8 +52,7 @@
                name="item.name"
                sort="item.sort"
                type="list.type"
-               value="item.value">
-    </list-item>
+               value="item.value"></list-item>
   </div>
 
   <div class="lst-list-options" ng-if="!listId">
@@ -54,18 +61,12 @@
     this on ridiculi.st
   </div>
 
-  <button type="button"
-          ng-if="!listId"
-          class="lst-list-save btn btn-block btn-lg"
-          ng-click="createList()">
+  <button type="button" ng-if="!listId" class="lst-list-btn btn btn-block btn-lg" ng-click="createList()">
     Save
   </button>
 
-  <div class="btn btn-block btn-lg btn-primary"
-       ng-if="listId"
-       clip-copy="getLink()"
-       clip-click="onCopy()">
-    <span ng-hide="linkCopied"> <i class="ion ion-link"></i> {{ listLink }} </span>
+  <div class="lst-list-btn btn btn-block btn-lg" ng-if="listId" clip-copy="getLink()" clip-click="onCopy()">
+    <span ng-hide="linkCopied"> <i class="ion ion-link"></i> get link</span>
     <span ng-show="linkCopied"> Copied! </span>
   </div>
 </form>

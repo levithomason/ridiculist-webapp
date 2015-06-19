@@ -1,0 +1,28 @@
+.lst-public-lists-wrapper {
+  overflow: hidden;
+  text-align: center;
+  margin-top: 4em;
+
+  .header {
+    color: #fff;
+  }
+
+  .lst-public-list {
+    .lst-transition(color, box-shadow);
+    display: inline-block;
+    margin: 1em;
+    background: fade(#f6f6f6, 95);
+    padding: 1em 1.5em;
+    color: fade(@text-color, 80);
+    box-shadow: 0 1px 1px fade(#000, 30);
+    &:hover {
+      color: @text-color;
+      background: #fff;
+      text-decoration: none;
+      box-shadow: 0 2px 3px fade(#000, 20);
+    }
+    i {
+      margin-right: 1em;
+    }
+  }
+}

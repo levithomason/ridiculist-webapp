@@ -1,10 +1,10 @@
 .lst-list-form {
   padding: 20px;
-  width: 100%;
-  max-width: 400px;
+  width: 400px;
+  max-width: 95%;
   margin: auto;
   border-radius: @border-radius-base;
-  background: #FFF;
+  background: #fff;
   box-shadow: 0 5px 20px fade(#000, 20);
 
   .lst-list-heading {
@@ -62,10 +62,12 @@
     margin: 20px 0;
   }
 
-  .lst-list-save {
+  .lst-list-btn {
+    color: @brand-primary;
+    
+    &.zeroclipboard-is-hover,
     &:hover {
       background: @gray-lighter;
-      color: @brand-primary;
     }
   }
 }
