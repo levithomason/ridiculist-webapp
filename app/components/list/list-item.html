@@ -1,5 +1,7 @@
-<div class="lst-list-item" ng-class="{'active': value}">
-    <div class="lst-form-control-icon" ng-click="toggle()">
+<div class="lst-list-item" 
+     ng-class="{'active': value, 'lst-item-read-only': isReadOnly}" 
+     ng-click="onClick()">
+    <div class="lst-form-control-icon">
         <div class="lst-todo-item-control" ng-show="type === 'todo'">
             <i ng-hide="value" class="ion-android-checkbox-outline-blank"></i>
             <i ng-show="value" class="ion-android-checkbox-outline"></i>
@@ -18,10 +20,10 @@
 
     <div class="lst-form-control">
         <input type="text"
-               ng-disabled="disable"
+               ng-disabled="isReadOnly"
                class="lst-list-item-input"
                placeholder="Add item"
-               ng-model="name" 
+               ng-model="name"
                ng-keydown="onKeydown($event)"
                ng-change="onChange()"/>
     </div>

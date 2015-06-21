@@ -16,7 +16,8 @@
     "bootstrap": "~3.3.4",
     "ionicons": "~2.0.1",
     "zeroclipboard": "~2.2.0",
-    "ng-clip": "~0.2.6"
+    "ng-clip": "~0.2.6",
+    "angular-local-storage": "~0.2.2"
   },
   "resolutions": {
     "angular": "1.2.28"

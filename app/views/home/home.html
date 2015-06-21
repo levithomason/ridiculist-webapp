@@ -3,7 +3,7 @@
     <i class="ion-android-list"></i> ridiculist
   </a>
   <a class="lst-item-primary-btn" href="/">
-    <i class="ion ion-android-add-circle"></i> make
+    <i class="ion-android-add-circle"></i> make
   </a>
 </nav>
 
@@ -16,12 +16,12 @@
 <list list-id="listId"></list>
 
 <div class="lst-public-lists-wrapper">
-  <h2 class="header"><i class="ion ion-earth"></i> public lists</h2>
+  <h2 class="header"><i class="ion-earth"></i> public lists</h2>
   <a ng-href="{{ listId }}"
      class="lst-public-list"
      ng-if="listId !== idUrlParam"
      ng-repeat="(listId, listData) in lists">
-    <i class="ion ion-android-list"></i>
+    <i class="{{ LIST_ICONS[listData.type] }}"></i>
     {{ listData.title }}
   </a>
 </div>

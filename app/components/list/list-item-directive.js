@@ -1,11 +1,11 @@
 'use strict';
 
-function listItem($rootScope) {
+function listItem($rootScope, LIST_ICONS) {
     return {
         restrict: 'E',
         replace: true,
         scope: {
-            disable: '=',
+            isReadOnly: '=',
             name: '=',
             sort: '=',
             type: '=',
@@ -14,6 +14,7 @@ function listItem($rootScope) {
         },
         templateUrl: 'app/components/list/list-item.html',
         link: function(scope, elem, attrs) {
+            scope.LIST_ICONS = LIST_ICONS;
             scope.toggle = function() {
                 scope.value = !scope.value;
             };
@@ -22,6 +23,10 @@ function listItem($rootScope) {
                 $rootScope.$broadcast('lst:list:itemChanged', scope);
             };
             
+            scope.onClick = function() {
+                $rootScope.$broadcast('lst:list:itemClicked', scope);
+            };
+
             scope.onKeydown = function(e) {
                 switch (e.keyCode) {
                     // enter
@@ -38,5 +43,5 @@ function listItem($rootScope) {
     }
 }
 
-angular.module('App')
+angular.module('App.list')
     .directive('listItem', listItem);
