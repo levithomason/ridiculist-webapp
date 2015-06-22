@@ -14,9 +14,9 @@ angular.module('App')
       });
   }])
 
-  .controller('Controller', ['$scope', 'FIREBASE_ROOT', '$firebaseObject', '$routeParams', 'LIST_ICONS',
-    function ($scope, FIREBASE_ROOT, $firebaseObject, $routeParams, LIST_ICONS) {
-      var publicListsRef = new Firebase(FIREBASE_ROOT).child('lists');
+  .controller('Controller', ['$scope', 'FIREBASE', '$firebaseObject', '$routeParams', 'LIST_ICONS',
+    function ($scope, FIREBASE, $firebaseObject, $routeParams, LIST_ICONS) {
+      var publicListsRef = new Firebase(FIREBASE.lists);
       $scope.lists = $firebaseObject(publicListsRef);
       $scope.LIST_ICONS = LIST_ICONS;
 

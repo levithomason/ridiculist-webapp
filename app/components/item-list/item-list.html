@@ -1,0 +1,96 @@
+<form class="lst-list-form">
+    <div class="lst-list-heading">
+        <div class="lst-form-control lst-title">
+            <input type="text"
+                   ng-model="itemList.list.title"
+                   placeholder="title"
+                   class="lst-title-input"
+                   maxlength="24"
+                   autofocus="autofocus"/>
+        </div>
+    </div>
+
+    <div class="lst-list-types">
+        <button type="button"
+                class="lst-type lst-todo"
+                ng-class="{active: itemList.list.type === LIST_TYPES.todo}"
+                ng-click="setListType(LIST_TYPES.todo)">
+            <i class="ion-android-checkbox-outline"></i>
+            todo
+        </button>
+        <button type="button"
+                class="lst-type lst-vote"
+                ng-class="{active: itemList.list.type === LIST_TYPES.vote}"
+                ng-click="setListType(LIST_TYPES.vote)">
+            <i class="ion-android-star-outline"></i>
+            vote
+        </button>
+        <button type="button"
+                class="lst-type lst-survey"
+                ng-class="{active: itemList.list.type === LIST_TYPES.survey}"
+                ng-click="setListType(LIST_TYPES.survey)">
+            <i class="ion-android-radio-button-on"></i>
+            survey
+        </button>
+    </div>
+
+    <div class="lst-list-items">
+        <div class="lst-list-item"
+             ng-repeat="item in itemList.items track by $index"
+             ng-class="{'active': item.value}" 
+             ng-click="onClick()">
+            <div class="lst-form-control-icon">
+                <div class="lst-todo-item-control" ng-show="item.type === 'todo'">
+                    <i ng-hide="item.value" class="ion-android-checkbox-outline-blank"></i>
+                    <i ng-show="item.value" class="ion-android-checkbox-outline"></i>
+                </div>
+
+                <div class="lst-vote-item-control" ng-show="item.type === 'vote'">
+                    <i ng-show="item.value" class="ion-android-star"></i>
+                    <i ng-hide="item.value" class="ion-android-star-outline"></i>
+                </div>
+
+                <div class="lst-survey-item-control" ng-show="item.type === 'survey'">
+                    <i ng-show="item.value" class="ion-android-radio-button-on"></i>
+                    <i ng-hide="item.value" class="ion-android-radio-button-off"></i>
+                </div>
+            </div>
+
+            <div class="lst-form-control">
+                <input type="text"
+                       class="lst-list-item-input"
+                       placeholder="Add item"
+                       ng-model="item.name"
+                       ng-change="onItemChange()"
+                       ng-keydown="onKeydown($event, $index)"
+                        />
+            </div>
+            <small>{{ item.type }}: {{ item.value }}</small>
+        </div>
+
+        <!--<list-item ng-repeat="item in items track by $index"-->
+                   <!--on-change="onItemChange(item)"-->
+                   <!--id="item.$id"-->
+                   <!--index="$index"-->
+                   <!--name="item.name"-->
+                   <!--sort="item.sort"-->
+                   <!--type="itemList.list.type"-->
+                   <!--value="item.value">-->
+        <!--</list-item>-->
+    </div>
+
+    <div class="lst-list-options">
+        <a href="" target="_parent" ng-click="toggleFeatured()" ng-show="itemList.list.security === 'public'">Show</a>
+        <a href="" target="_parent" ng-click="toggleFeatured()" ng-show="itemList.list.security === 'link'">Hide</a>
+        this on ridiculi.st
+    </div>
+
+    <button type="button" class="lst-list-btn btn btn-block btn-lg" ng-click="createList()">
+        Save
+    </button>
+
+    <div class="lst-list-btn btn btn-block btn-lg" clip-copy="getLink()" clip-click="onCopy()">
+        <span ng-hide="linkCopied"><i class="ion ion-link"></i> get link</span>
+        <span ng-show="linkCopied"> Copied! </span>
+    </div>
+</form>

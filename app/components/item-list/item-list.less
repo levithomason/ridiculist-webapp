@@ -25,30 +25,28 @@
   // List Type
   .lst-list-types {
     margin-bottom: 20px;
+    overflow: hidden;
 
-    .lst-list-type {
-      text-align: center;
-
-      .lst-type {
-        .lst-transition(color, opacity, transform;);
-        display: inline-block;
-        color: @gray-light;
-        font-size: 1.35em;
-        opacity: 0.5;
-        cursor: pointer;
-        transform: scale3d(0.8, 0.8, 0.8);
-        &:hover,
+    .lst-type {
+      .lst-transition(color, opacity, transform;);
+      float: left;
+      color: @gray-light;
+      width: 33.333%;
+      font-size: 1.35em;
+      opacity: 0.5;
+      cursor: pointer;
+      transform: scale3d(0.8, 0.8, 0.8);
+      &:hover,
+      &:focus {
+        transform: scale3d(0.9, 0.9, 0.9);
+        opacity: 1;
+      }
+      &.active {
+        transform: scale3d(0.9, 0.9, 0.9);
+        opacity: 1;
+        color: @brand-primary;
         &:focus {
-          transform: scale3d(0.9, 0.9, 0.9);
-          opacity: 1;
-        }
-        &.active {
           transform: scale3d(1, 1, 1);
-          opacity: 1;
-          color: @brand-primary;
-          &:focus {
-            transform: scale3d(1.1, 1.1, 1.1);
-          }
         }
       }
     }
@@ -64,7 +62,7 @@
 
   .lst-list-btn {
     color: @brand-primary;
-    
+
     &.zeroclipboard-is-hover,
     &:hover {
       background: @gray-lighter;

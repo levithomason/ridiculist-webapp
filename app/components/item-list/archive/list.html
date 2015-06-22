@@ -1,0 +1,74 @@
+<form class="lst-list-form">
+    <div class="lst-list-heading">
+        <div class="lst-form-control lst-title">
+            <input ng-disabled="!isNew"
+                   type="text"
+                   ng-model="list.title"
+                   placeholder="title"
+                   class="lst-title-input"
+                   maxlength="24"
+                   autofocus="autofocus"/>
+        </div>
+    </div>
+
+    <div class="lst-list-types" ng-if="isNew">
+        <div class="lst-list-type">
+            <div class="row">
+                <div class="col-xs-4">
+                    <button type="button"
+                            class="lst-type lst-todo"
+                            ng-class="{active: list.type === LIST_TYPES.todo}"
+                            ng-click="setType(LIST_TYPES.todo)">
+                        <i class="ion-android-checkbox-outline"></i>
+                        todo
+                    </button>
+                </div>
+                <div class="col-xs-4">
+                    <button type="button"
+                            class="lst-type lst-vote"
+                            ng-class="{active: list.type === LIST_TYPES.vote}"
+                            ng-click="setType(LIST_TYPES.vote)">
+                        <i class="ion-android-star-outline"></i>
+                        vote
+                    </button>
+                </div>
+                <div class="col-xs-4">
+                    <button type="button"
+                            class="lst-type lst-survey"
+                            ng-class="{active: list.type === LIST_TYPES.survey}"
+                            ng-click="setType(LIST_TYPES.survey)">
+                        <i class="ion-android-radio-button-on"></i>
+                        survey
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="lst-list-items">
+        <list-item ng-repeat="item in items track by $index"
+                   id="item.$id"
+                   is-read-only="!isNew"
+                   index="$index"
+                   name="item.name"
+                   sort="item.sort"
+                   type="list.type"
+                   value="item.value">
+        </list-item>
+    </div>
+
+    <div class="lst-list-options" ng-if="isNew">
+        <a href="" target="_parent" ng-click="toggleFeatured()" ng-show="list.security === 'public'">Show</a>
+        <a href="" target="_parent" ng-click="toggleFeatured()" ng-show="list.security === 'link'">Hide</a>
+        this on ridiculi.st
+    </div>
+
+    <button type="button" ng-if="isNew" class="lst-list-btn btn btn-block btn-lg" ng-click="createList()">
+        Save
+    </button>
+
+    <div class="lst-list-btn btn btn-block btn-lg" ng-if="!isNew" clip-copy="getLink()" clip-click="onCopy()">
+        <span ng-hide="linkCopied"><i class="ion ion-link"></i> get link</span>
+        <span ng-show="linkCopied"> Copied! </span>
+    </div>
+</form>
