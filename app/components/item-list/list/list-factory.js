@@ -17,7 +17,7 @@ var ListFactory = function($q, FIREBASE, $firebaseArray) {
         this.title = '';
         this.security = 'public';
         this.type = 'todo';
-        
+
         angular.extend(this, list);
     }
 
@@ -35,11 +35,16 @@ var ListFactory = function($q, FIREBASE, $firebaseArray) {
     };
 
     // Prototype
-    List.prototype.save = function() {
-        return lists.save(this);
+    List.prototype.add = function() {
+        return lists.$add(this)
+            .then(function(ref) {
+                var savedRecord = lists.$getRecord(ref.key());
+                return new List(savedRecord);
+            });
     };
-    List.prototype.focusItem = function() {
-        return this;
+
+    List.prototype.getLink = function() {
+        return this.$id ? 'www.ridiculi.st/' + this.$id : null;
     };
 
     window.List = List;

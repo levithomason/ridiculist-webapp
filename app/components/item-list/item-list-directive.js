@@ -1,6 +1,6 @@
 'use strict';
 
-function list($routeParams, ItemListFactory, LIST_TYPES) {
+function list($routeParams, $timeout, ItemListFactory, LIST_TYPES) {
     return {
         restrict: 'E',
         replace: true,
@@ -59,24 +59,42 @@ function list($routeParams, ItemListFactory, LIST_TYPES) {
             };
 
             //
-            // List
+            // Item List
             //
+
             scope.setListType = function(type) {
                 scope.itemList.setType(type);
             };
 
-            scope.saveList = function() {
+            scope.save = function() {
                 scope.itemList.save();
             };
 
             //
+            // Get Link
+            //
+
+            scope.getLink = function() {
+                return scope.itemList.getLink();
+            };
+
+            scope.onCopy = function() {
+                scope.linkCopied = true;
+
+                $timeout(function() {
+                    scope.linkCopied = false;
+                }, 1000);
+            };
+            
+            //
             // Bindings
             //
+
             scope.handleEnterKey = function(e, itemIndex) {
                 var offset;
 
                 if (e.metaKey) {
-                    scope.saveList();
+                    scope.save();
                 } else {
                     offset = e.shiftKey ? -1 : 1;
                     scope.focusItem(itemIndex + offset);

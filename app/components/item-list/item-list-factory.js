@@ -13,7 +13,7 @@ var ItemListFactory = function($q, ItemFactory, ListFactory) {
 
         angular.extend(this, itemList);
     }
-
+    
     ItemList.getByListId = function(id) {
         var deferred = $q.defer();
 
@@ -29,6 +29,10 @@ var ItemListFactory = function($q, ItemFactory, ListFactory) {
         return deferred.promise;
     };
 
+    ItemList.prototype.getLink = function(type) {
+        return this.list.getLink();
+    };
+
     ItemList.prototype.setType = function(type) {
         var newType = LIST_TYPES[type];
         if (!newType) {
@@ -42,10 +46,23 @@ var ItemListFactory = function($q, ItemFactory, ListFactory) {
     };
 
     ItemList.prototype.save = function() {
-        this.list.save();
-        angular.forEach(this.items, function(item) {
-            item.save();
+        var deferred = $q.defer();
+
+        var self = this;
+
+        // save list then
+        // save non empty items adding listId
+        self.list.add().then(function(savedList) {
+            angular.forEach(self.items, function(item) {
+                if (!item.name) return;
+                item.listId = savedList.$id;
+                item.add();
+            });
+
+            deferred.resolve(self);
         });
+
+        return deferred.promise;
     };
 
     ItemList.prototype.add = function(item) {

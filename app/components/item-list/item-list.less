@@ -6,6 +6,28 @@
   border-radius: @border-radius-base;
   background: #fff;
   box-shadow: 0 5px 20px fade(#000, 20);
+  &.is-read-only {
+    .lst-list-item-input,
+    .lst-list-types,
+    .lst-list-options,
+    .lst-list-save {
+      display: none;
+    }
+    
+    .lst-list-item {
+      .lst-transition(color;);
+      &:hover {
+        color: @lst-brand-primary;
+      }
+    }
+  }
+
+  &:not(.is-read-only) {
+    .lst-list-item-display,
+    .lst-list-get-link {
+      display: none;
+    }
+  }
 
   .lst-list-heading {
     margin-bottom: 20px;
@@ -22,7 +44,8 @@
   }
 
   //
-  // List Type
+  // Types
+  //
   .lst-list-types {
     margin-bottom: 20px;
     overflow: hidden;
@@ -35,31 +58,68 @@
       font-size: 1.35em;
       opacity: 0.5;
       cursor: pointer;
-      transform: scale3d(0.8, 0.8, 0.8);
-      &:hover,
-      &:focus {
-        transform: scale3d(0.9, 0.9, 0.9);
-        opacity: 1;
-      }
+      transform: scale3d(0.9, 0.9, 0.9);
       &.active {
-        transform: scale3d(0.9, 0.9, 0.9);
         opacity: 1;
         color: @brand-primary;
-        &:focus {
-          transform: scale3d(1, 1, 1);
+      }
+      &:hover,
+      &:focus {
+        transform: scale3d(1, 1, 1);
+        opacity: 1;
+      }
+    }
+  }
+
+  //
+  // Items
+  //
+  .lst-list-items {
+    margin: 40px 0;
+
+    .lst-list-item {
+      position: relative;
+      font-size: 1.2em;
+      margin-bottom: 0.5em;
+
+      &.active {
+        .lst-form-control-icon {
+          color: @lst-brand-primary;
+        }
+      }
+
+      .lst-form-control-icon {
+        position: absolute;
+        left: 0;
+        cursor: pointer;
+        user-select: none;
+        font-size: 1.2em;
+      }
+
+      .lst-form-control {
+        padding-left: 2em;
+        .lst-list-item-display {
+          padding-top: 2px;
+          cursor: pointer;
+        }
+
+        .lst-list-item-input {
+          width: 100%;
         }
       }
     }
   }
 
-  .lst-list-items {
-    margin: 40px 0;
-  }
-
+  //
+  // Options
+  //
   .lst-list-options {
     margin: 20px 0;
   }
 
+  //
+  // Buttons
+  //
   .lst-list-btn {
     color: @brand-primary;
 

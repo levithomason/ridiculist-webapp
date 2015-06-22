@@ -35,16 +35,20 @@ var ItemFactory = function($q, FIREBASE, $firebaseArray, LIST_TYPES) {
 
                 deferred.resolve(items);
             });
-        
+
         return deferred.promise;
     };
 
-    Item.prototype.save = function() {
+    Item.prototype.add = function() {
         if (!this.listId) {
             throw new Error('Item.save() requires a `listId` property to save.')
         }
 
-        return items.$save(this);
+        return items.$add(this)
+            .then(function(ref) {
+                var savedRecord = items.$getRecord(ref.key());
+                return new Item(savedRecord);
+            });
     };
 
     Item.prototype.increment = function() {
