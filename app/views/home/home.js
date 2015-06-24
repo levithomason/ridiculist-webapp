@@ -21,5 +21,4 @@ angular.module('App')
       $scope.LIST_ICONS = LIST_ICONS;
 
       $scope.idUrlParam = $routeParams.id;
-
     }]);

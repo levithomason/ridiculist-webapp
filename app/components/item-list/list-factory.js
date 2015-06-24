@@ -4,11 +4,7 @@ var ListFactory = function(FIREBASE, $firebaseObject, LIST_TYPES) {
   var defaultList = {
     title: '',
     security: LIST_SECURITY.public,
-    type: LIST_TYPES.todo,
-    toggleSecurity: function() {
-      var isPublic = this.security === 'public';
-      this.security = isPublic ? 'link' : 'public';
-    }
+    type: LIST_TYPES.todo
   };
 
   var FirebaseList = $firebaseObject.$extend({
@@ -18,9 +14,16 @@ var ListFactory = function(FIREBASE, $firebaseObject, LIST_TYPES) {
     }
   });
 
-  return function List(id) {
+  function List(id) {
     return id ? new FirebaseList(ref.child(id)) : angular.copy(defaultList);
+  }
+
+  List.toggleSecurity = function(list) {
+    var isPublic = list.security === 'public';
+    list.security = isPublic ? 'link' : 'public';
   };
+
+  return List;
 };
 
 angular.module('App.itemList')

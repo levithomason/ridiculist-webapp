@@ -1,5 +1,8 @@
 var ItemListFactory = function($q, ItemFactory, ListFactory, LIST_TYPES, LIST_SECURITY, $firebaseArray) {
   var itemsRef = new Firebase(FIREBASE.items);
+  var listsRef = new Firebase(FIREBASE.lists);
+  var items = $firebaseArray(itemsRef);
+  var lists = $firebaseArray(listsRef);
 
   /**
    * An a `list` of `items`.
@@ -48,19 +51,21 @@ var ItemListFactory = function($q, ItemFactory, ListFactory, LIST_TYPES, LIST_SE
     });
   };
 
-  ItemList.prototype.save = function() {
+  ItemList.prototype.create = function() {
     var deferred = $q.defer();
     var self = this;
 
     // save list then
-    self.list.add().then(function(savedList) {
-      self.list = savedList;
+    lists.$add(self.list).then(function(savedList) {
+      var listId = savedList.key();
+      self.list = new ListFactory(listId);
 
       angular.forEach(self.items, function(item, i) {
         // skip blank items
         if (!item.name) return;
         item.listId = self.list.$id;
-        item.add().then(function(savedItem) {
+        console.log(item);
+        items.$add(item).then(function(savedItem) {
           // add saved item back to itemList
           self.items[i] = savedItem;
         });

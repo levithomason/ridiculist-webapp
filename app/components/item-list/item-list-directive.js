@@ -72,14 +72,13 @@ function list($routeParams, $timeout, $location, ItemListFactory, LIST_TYPES) {
       };
 
       scope.toggleFeatured = function() {
-        scope.itemList.list.toggleSecurity();
+        ListFactory.toggleSecurity(list);
       };
 
-      scope.save = function() {
-        return scope.itemList.save().then(function(itemList) {
+      scope.create = function() {
+        scope.itemList.create().then(function(itemList) {
           scope.itemList = itemList;
           $location.path(itemList.list.$id);
-          return itemList
         });
       };
 
@@ -108,7 +107,7 @@ function list($routeParams, $timeout, $location, ItemListFactory, LIST_TYPES) {
         var offset;
 
         if (e.metaKey) {
-          scope.save();
+          scope.create();
         } else {
           offset = e.shiftKey ? -1 : 1;
           scope.focusItem(itemIndex + offset);
