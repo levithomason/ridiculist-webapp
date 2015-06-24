@@ -80,5 +80,5 @@ app.use('/', express.static(__dirname + '/'));
 //
 // Angular html5mode
 app.all('/*', function(req, res) {
-    res.sendFile(__dirname + '/index.html');
+    res.sendFile(__dirname + '/build/index.html');
 });

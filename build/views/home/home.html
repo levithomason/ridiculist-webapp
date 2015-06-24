@@ -1,0 +1,27 @@
+<nav class="lst-top-nav">
+  <a class="lst-nav-item" href="/">
+    <i class="ion-android-list"></i> ridiculist
+  </a>
+  <a class="lst-item-primary-btn" href="/">
+    <i class="ion-android-add-circle"></i> make
+  </a>
+</nav>
+
+<div class="jumbotron">
+  <p class="lead">
+    Free lists for everyone, for anything.
+  </p>
+</div>
+
+<list list-id="listId"></list>
+
+<div class="lst-public-lists-wrapper">
+  <h2 class="header"><i class="ion-earth"></i> public lists</h2>
+  <a ng-href="{{ listId }}"
+     class="lst-public-list"
+     ng-if="listId !== idUrlParam"
+     ng-repeat="(listId, listData) in lists">
+    <i class="{{ LIST_ICONS[listData.type] }}"></i>
+    {{ listData.title }}
+  </a>
+</div>

@@ -14,7 +14,7 @@ angular.module('App')
       });
   }])
 
-  .controller('Controller', ['$scope', 'FIREBASE', '$firebaseObject', '$routeParams', 'LIST_ICONS',
+.controller('Controller', ['$scope', 'FIREBASE', '$firebaseObject', '$routeParams', 'LIST_ICONS',
     function ($scope, FIREBASE, $firebaseObject, $routeParams, LIST_ICONS) {
       var publicListsRef = new Firebase(FIREBASE.lists);
       $scope.lists = $firebaseObject(publicListsRef);
@@ -23,4 +23,3 @@ angular.module('App')
       $scope.idUrlParam = $routeParams.id;
 
     }]);
-
