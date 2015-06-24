@@ -1,10 +1,11 @@
 <form class="lst-list-form" ng-class="{'is-read-only': !isNew}">
     <div class="lst-list-heading">
         <div class="lst-form-control lst-title">
+            <div class="lst-list-title-display">{{ itemList.list.title }}</div>
             <input type="text"
                    ng-model="itemList.list.title"
                    placeholder="title"
-                   class="lst-title-input"
+                   class="lst-list-title-input"
                    maxlength="24"
                    autofocus="autofocus"/>
         </div>
