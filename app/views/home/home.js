@@ -14,9 +14,9 @@ angular.module('App')
       });
   })
 
-  .controller('Controller', function($scope, FIREBASE, $firebaseArray, $routeParams, LIST_ICONS, $window, $timeout) {
+  .controller('Controller', function($scope, FIREBASE, $firebaseObject, $routeParams, LIST_ICONS, $window, $timeout) {
     var publicListsRef = new Firebase(FIREBASE.lists);
-    $scope.lists = $firebaseArray(publicListsRef);
+    $scope.lists = $firebaseObject(publicListsRef);
     $scope.LIST_ICONS = LIST_ICONS;
 
 
