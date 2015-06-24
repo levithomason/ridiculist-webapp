@@ -51,8 +51,8 @@ var ItemFactory = function(FIREBASE, LIST_TYPES, $firebaseObject) {
     }
   });
 
-  return function Item(itemId) {
-    return new FirebaseItem(ref.child(itemId));
+  return function Item(id) {
+    return id ? new FirebaseItem(ref.child(id)) : angular.copy(defaultItem);
   };
 };
 

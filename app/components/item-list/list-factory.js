@@ -18,9 +18,8 @@ var ListFactory = function(FIREBASE, $firebaseObject, LIST_TYPES) {
     }
   });
 
-
   return function List(id) {
-    return id ? new FirebaseList(ref.child(id)) : defaultList;
+    return id ? new FirebaseList(ref.child(id)) : angular.copy(defaultList);
   };
 };
 

@@ -75,9 +75,9 @@ var ItemListFactory = function($q, ItemFactory, ListFactory, LIST_TYPES, LIST_SE
   //
   // Items
   //
-  ItemList.prototype.addItem = function(item) {
-    var newItem = new ItemFactory(item);
-
+  ItemList.prototype.addItem = function() {
+    var newItem = new ItemFactory();
+    newItem.type = this.list.type;
     this.items.push(newItem);
     return this;
   };

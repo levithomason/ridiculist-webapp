@@ -15,8 +15,7 @@ function list($routeParams, $timeout, $location, ItemListFactory, LIST_TYPES) {
 
         if (scope.isNew) {
           scope.itemList = new ItemListFactory();
-          console.log(scope.itemList);
-          //scope.addItem();
+          scope.addItem();
         } else {
           scope.itemList = ItemListFactory.getByListId(listId);
         }
@@ -26,7 +25,7 @@ function list($routeParams, $timeout, $location, ItemListFactory, LIST_TYPES) {
       // Items
       //
       scope.addItem = function() {
-        scope.itemList.addItem({type: scope.itemList.list.type});
+        scope.itemList.addItem();
       };
 
       scope.focusItem = function(index) {
