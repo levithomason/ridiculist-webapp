@@ -1,7 +1,6 @@
-Ridiculist
-==========
+[ridiculi.st](https://ridiculist.herokuapp.com/)
+================================================
 
-## [Demo](https://ridiculist.herokuapp.com/ )
 Ridiculously simple lists, for everything.
 
 # Hack on it
