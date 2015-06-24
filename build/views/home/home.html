@@ -2,20 +2,21 @@
   <a class="lst-nav-item" href="/">
     <i class="ion-android-list"></i> ridiculist
   </a>
-  <a class="lst-item-primary-btn" href="/">
+  <a class="lst-item-primary-btn" href="/" ng-show="ninja">
     <i class="ion-android-add-circle"></i> make
   </a>
 </nav>
 
 <div class="jumbotron">
+  <h1 ng-show="!ninja">We're updating, be back soon!</h1>
   <p class="lead">
     Free lists for everyone, for anything.
   </p>
 </div>
 
-<list list-id="listId"></list>
+<list ng-hide="!ninja" list-id="listId"></list>
 
-<div class="lst-public-lists-wrapper">
+<div class="lst-public-lists-wrapper" ng-hide="!ninja">
   <h2 class="header"><i class="ion-earth"></i> public lists</h2>
   <a ng-href="{{ listId }}"
      class="lst-public-list"

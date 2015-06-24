@@ -2,7 +2,7 @@
 
 angular.module('App')
 
-  .config(['$routeProvider', function($routeProvider) {
+  .config(function($routeProvider) {
     $routeProvider
       .when('/:id', {
         templateUrl: '/app/views/home/home.html',
@@ -12,13 +12,21 @@ angular.module('App')
         templateUrl: '/app/views/home/home.html',
         controller: 'Controller'
       });
-  }])
+  })
 
-  .controller('Controller', ['$scope', 'FIREBASE', '$firebaseObject', '$routeParams', 'LIST_ICONS',
-    function($scope, FIREBASE, $firebaseArray, $routeParams, LIST_ICONS) {
-      var publicListsRef = new Firebase(FIREBASE.lists);
-      $scope.lists = $firebaseArray(publicListsRef);
-      $scope.LIST_ICONS = LIST_ICONS;
+  .controller('Controller', function($scope, FIREBASE, $firebaseArray, $routeParams, LIST_ICONS, $window, $timeout) {
+    var publicListsRef = new Firebase(FIREBASE.lists);
+    $scope.lists = $firebaseArray(publicListsRef);
+    $scope.LIST_ICONS = LIST_ICONS;
 
-      $scope.idUrlParam = $routeParams.id;
-    }]);
+
+    // allow setting ninja = true in the console to show the app
+    (function amIANinjaYet() {
+      $timeout(function() {
+        $scope.ninja = $window.ninja;
+        if (!$scope.ninja) amIANinjaYet();
+      }, 100);
+    }());
+
+    $scope.idUrlParam = $routeParams.id;
+  });
