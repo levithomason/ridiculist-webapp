@@ -17,13 +17,10 @@
 
 <div class="lst-public-lists-wrapper">
   <h2 class="header"><i class="ion-earth"></i> public lists</h2>
-  <div class="lst-public-list-search">
-    <input type="text" ng-model="publicQuery"/>
-  </div>
   <a ng-href="{{ listId }}"
      class="lst-public-list"
      ng-if="listId !== idUrlParam"
-     ng-repeat="(listId, listData) in lists | filter:{$:publicQuery}">
+     ng-repeat="(listId, listData) in lists">
     <i class="{{ LIST_ICONS[listData.type] }}"></i>
     {{ listData.title }}
   </a>
