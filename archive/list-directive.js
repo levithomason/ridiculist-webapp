@@ -69,7 +69,6 @@ function list($rootScope, $timeout, $q, $location, $routeParams, $firebaseArray,
 
             scope.toggleFeatured = function() {
                 var isPublic = scope.list.security === 'public';
-
                 scope.list.security = isPublic ? 'link' : 'public';
             };
 

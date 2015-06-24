@@ -11,12 +11,10 @@
     "angular-loader": "1.2.x",
     "angular-mocks": "~1.2.x",
     "angularfire": "~1.0.0",
-    "less.js": "~2.5.0",
     "bootstrap": "~3.3.4",
     "ionicons": "~2.0.1",
-    "zeroclipboard": "~2.2.0",
-    "ng-clip": "~0.2.6",
-    "angular-local-storage": "~0.2.2"
+    "angular-local-storage": "~0.2.2",
+    "ng-clip": "~0.2.6"
   },
   "resolutions": {
     "angular": "1.2.28"

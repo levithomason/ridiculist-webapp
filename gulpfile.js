@@ -12,11 +12,6 @@ var paths = {
   views: './app/views/',
 };
 
-function handleError(err) {
-  console.log(err.toString());
-  this.emit('end');
-}
-
 gulp.task('build', function(cb) {
   runSequence(
     'clean',
@@ -46,9 +41,10 @@ gulp.task('build-js', function(cb) {
       paths.app + '**/*-controller.js',
       paths.app + '**/*.js'
   ])
+    .pipe($.plumber())
     .pipe($.concat('app.min.js'))
     .pipe($.ngAnnotate())
-    .pipe($.uglify())
+    //.pipe($.uglify())
     .pipe(gulp.dest(paths.build));
 });
 
@@ -64,7 +60,7 @@ gulp.task('build-less', function(cb) {
   return gulp.src([
     paths.less + 'app.less'
   ])
-    .pipe($.plumber(handleError))
+    .pipe($.plumber())
     .pipe($.less())
     .pipe($.autoprefixer())
     .pipe($.minifyCss({keepSpecialComments: 0}))

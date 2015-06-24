@@ -13,13 +13,9 @@ angular.module('App', [
   'App.itemList',
 ])
 
-  .run(function(ListFactory, ItemFactory, ItemListFactory) {
-    // load factories
+  .config(function(ngClipProvider) {
+    ngClipProvider.setPath('/bower_components/zeroclipboard/dist/ZeroClipboard.swf');
   })
-
-  .config(['ngClipProvider', function(ngClipProvider) {
-    ngClipProvider.setPath('app/bower/zeroclipboard/dist/ZeroClipboard.swf');
-  }])
 
   .config(function(localStorageServiceProvider) {
     localStorageServiceProvider
@@ -28,7 +24,7 @@ angular.module('App', [
       .setNotify(true, true)
   })
 
-  .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+  .config(function($routeProvider, $locationProvider) {
     $routeProvider.otherwise({redirectTo: '/'});
     $locationProvider.html5Mode(true).hashPrefix('!');
-  }]);
+  });

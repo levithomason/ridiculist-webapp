@@ -38,7 +38,7 @@
         <div class="lst-list-item"
              ng-repeat="item in itemList.items track by $index"
              ng-class="{'active': item.value}" 
-             ng-click="onClick()">
+             ng-click="onItemClick($index)">
             <div class="lst-form-control-icon">
                 <div class="lst-todo-item-control" ng-show="item.type === 'todo'">
                     <i ng-hide="item.value" class="ion-android-checkbox-outline-blank"></i>
@@ -66,7 +66,7 @@
                        ng-keydown="onKeydown($event, $index)"
                         />
             </div>
-            <!--<small>{{ item.type }}: {{ item.value }}</small>-->
+            <!--<small>{{ item.value }}</small>-->
         </div>
     </div>
 

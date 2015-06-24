@@ -1,76 +1,97 @@
-var ItemFactory = function($q, FIREBASE, $firebaseArray, LIST_TYPES) {
-    var ref = new Firebase(FIREBASE.items);
-    var items = $firebaseArray(ref);
+var ItemFactory = function(FIREBASE, LIST_TYPES, $firebaseObject) {
+  var ref = new Firebase(FIREBASE.items);
+  
+  var defaultItem = {
+    listId: '',
+    name: '',
+    sort: 0,
+    type: LIST_TYPES.todo,
+    value: 0
+  };
 
-    /**
-     * A list item.
-     * @param {object} item
-     * @param {string} item.listId
-     * @param {string} item.name
-     * @param {number} item.sort
-     * @param {string} item.type
-     * @param {number} item.value
-     * @constructor
-     */
-    function Item(item) {
-        item = item || {};
-
-        this.listId = item.listId || '';
-        this.name = item.name || '';
-        this.sort = item.sort || 0;
-        this.type = item.type || LIST_TYPES.todo;
-        this.value = item.value || 0;
+  var FirebaseItem = $firebaseObject.$extend({
+    $$defaults: defaultItem,
+    setValue: function(val) {
+      this.value = val;
+      this.$save();
+      return this;
+    },
+    increment: function() {
+      this.value += 1;
+      this.$save();
+      return this;
+    },
+    decrement: function() {
+      this.value -= 1;
+      this.$save();
+      return this;
+    },
+    toggle: function() {
+      switch (this.type) {
+        case LIST_TYPES.todo:
+          this.toggleBoolean();
+          break;
+        case LIST_TYPES.vote:
+          this.toggleSum();
+          break;
+        case LIST_TYPES.survey:
+          this.toggleSum();
+          break;
+      }
+      return this;
+    },
+    toggleBoolean: function() {
+      this.value === 0 ? this.setValue(1) : this.setValue(0);
+      return this;
     }
+    ,
+    toggleSum: function() {
+      this.value === 0 ? this.increment() : this.decrement();
+      return this;
+    }
+  });
 
-    Item.getByListId = function(id) {
-        var deferred = $q.defer();
-        var items = [];
-        var query = ref.orderByChild('listId').equalTo(id);
-
-        $firebaseArray(query).$loaded()
-            .then(function(remoteItems) {
-                angular.forEach(remoteItems, function(item) {
-                    items.push(new Item(item));
-                });
-
-                deferred.resolve(items);
-            });
-
-        return deferred.promise;
-    };
-
-    Item.prototype.add = function() {
-        if (!this.listId) {
-            throw new Error('Item.save() requires a `listId` property to save.')
-        }
-
-        return items.$add(this)
-            .then(function(ref) {
-                var savedRecord = items.$getRecord(ref.key());
-                return new Item(savedRecord);
-            });
-    };
-
-    Item.prototype.increment = function() {
-        this.value += 1;
-        return this;
-    };
-
-    Item.prototype.decrement = function() {
-        this.value -= 1;
-        return this;
-    };
-
-    Item.prototype.setValue = function(val) {
-        this.value = val;
-        return this;
-    };
-
-    window.Item = Item;
-
-    return Item;
+  return function Item(itemId) {
+    return new FirebaseItem(ref.child(itemId));
+  };
 };
 
 angular.module('App.itemList')
-    .factory('ItemFactory', ItemFactory)
+  .factory('ItemFactory', ItemFactory)
 ;
+
+///////////////////////////////////////////////////////////////////////////////
+
+//Item.prototype.add = function() {
+//  var deferred = $q.defer();
+//  var itemObj;
+//  var self = this;
+//
+//  if (!self.listId) {
+//    throw new Error('Item.save() requires a `listId` property to save.')
+//  }
+//
+//  items.$add(self)
+//    .then(function(ref) {
+//      var itemId = ref.key();
+//      var itemRef = new Firebase(FIREBASE.items).child(itemId);
+//      itemObj = $firebaseObject(itemRef);
+//
+//      return itemObj.$loaded()
+//    })
+//
+//    .then(function(itemObj) {
+//      console.log('itemObj', itemObj);
+//      var newItem = new Item(itemObj);
+//      console.log('newItem', newItem);
+//      deferred.resolve(newItem);
+//
+//      // To make the data available in the DOM, assign it to $scope
+//      //$scope.data = obj;
+//
+//      // For three-way data bindings, bind it to the scope instead
+//      //obj.$bindTo($scope, "data");
+//    });
+//
+//  return deferred.promise;
+//};
