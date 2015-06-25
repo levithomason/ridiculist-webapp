@@ -1,4 +1,4 @@
-var ItemFactory = function(FIREBASE, LIST_TYPES, $firebaseObject) {
+var ItemFactory = function(FIREBASE, LIST_TYPES, $firebaseObject, localStorageService) {
   var ref = new Firebase(FIREBASE.items);
   
   var defaultItem = {
@@ -11,18 +11,32 @@ var ItemFactory = function(FIREBASE, LIST_TYPES, $firebaseObject) {
 
   var FirebaseItem = $firebaseObject.$extend({
     $$defaults: defaultItem,
+    select: function(isSelected) {
+      localStorageService.set(this.$id, isSelected);
+    },
+    unselect: function() {
+      localStorageService.remove(this.$id);
+    },
+    isSelected: function() {
+      var isTodo = this.type === LIST_TYPES.todo;
+      var storedState = localStorageService.get(this.$id);
+      return isTodo ? this.value : storedState;
+    },
     setValue: function(val) {
       this.value = val;
+      this.select(true);
       this.$save();
       return this;
     },
     increment: function() {
       this.value += 1;
       this.$save();
+      this.select(true);
       return this;
     },
     decrement: function() {
       this.value -= 1;
+      this.unselect();
       this.$save();
       return this;
     },
@@ -41,12 +55,12 @@ var ItemFactory = function(FIREBASE, LIST_TYPES, $firebaseObject) {
       return this;
     },
     toggleBoolean: function() {
-      this.value === 0 ? this.setValue(1) : this.setValue(0);
+      this.isSelected() === 0 ? this.setValue(1) : this.setValue(0);
       return this;
     }
     ,
     toggleSum: function() {
-      this.value === 0 ? this.increment() : this.decrement();
+      this.isSelected() ? this.decrement() : this.increment();
       return this;
     }
   });

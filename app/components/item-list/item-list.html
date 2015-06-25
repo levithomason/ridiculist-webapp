@@ -38,22 +38,22 @@
     <div class="lst-list-items">
         <div class="lst-list-item"
              ng-repeat="item in itemList.items track by $index"
-             ng-class="{'active': item.value}" 
+             ng-class="{'active': item.isSelected()}" 
              ng-click="onItemClick($index)">
             <div class="lst-form-control-icon">
                 <div class="lst-todo-item-control" ng-show="item.type === 'todo'">
-                    <i ng-hide="item.value" class="ion-android-checkbox-outline-blank"></i>
-                    <i ng-show="item.value" class="ion-android-checkbox-outline"></i>
+                    <i ng-hide="item.isSelected()" class="ion-android-checkbox-outline-blank"></i>
+                    <i ng-show="item.isSelected()" class="ion-android-checkbox-outline"></i>
                 </div>
 
                 <div class="lst-vote-item-control" ng-show="item.type === 'vote'">
-                    <i ng-show="item.value" class="ion-android-star"></i>
-                    <i ng-hide="item.value" class="ion-android-star-outline"></i>
+                    <i ng-show="item.isSelected()" class="ion-android-star"></i>
+                    <i ng-hide="item.isSelected()" class="ion-android-star-outline"></i>
                 </div>
 
                 <div class="lst-survey-item-control" ng-show="item.type === 'survey'">
-                    <i ng-show="item.value" class="ion-android-radio-button-on"></i>
-                    <i ng-hide="item.value" class="ion-android-radio-button-off"></i>
+                    <i ng-show="item.isSelected()" class="ion-android-radio-button-on"></i>
+                    <i ng-hide="item.isSelected()" class="ion-android-radio-button-off"></i>
                 </div>
             </div>
 
@@ -67,7 +67,7 @@
                        ng-keydown="onKeydown($event, $index)"
                         />
             </div>
-            <!--<small>{{ item.value }}</small>-->
+            <!--<small>{{ item.value + item.isSelected()}}</small>-->
         </div>
     </div>
 

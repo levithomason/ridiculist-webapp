@@ -20,13 +20,5 @@ angular.module('App')
     $scope.LIST_ICONS = LIST_ICONS;
 
 
-    // allow setting ninja = true in the console to show the app
-    (function amIANinjaYet() {
-      $timeout(function() {
-        $scope.ninja = $window.ninja;
-        if (!$scope.ninja) amIANinjaYet();
-      }, 100);
-    }());
-
     $scope.idUrlParam = $routeParams.id;
   });
