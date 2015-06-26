@@ -4,23 +4,23 @@ var ListFactory = function(FIREBASE, $firebaseObject, LIST_TYPES) {
   var defaultList = {
     title: '',
     security: LIST_SECURITY.public,
-    type: LIST_TYPES.todo
-  };
-
-  var FirebaseList = $firebaseObject.$extend({
-    $$defaults: defaultList,
-    getLink: function() {
-      return this.$id ? 'www.ridiculi.st/' + this.$id : null;
+    type: LIST_TYPES.todo,
+    toggleSecurity: function() {
+      var isPublic = this.hasSecurity(LIST_SECURITY.public);
+      this.security = isPublic ? LIST_SECURITY.link : LIST_SECURITY.public;
     },
     isType: function(type) {
       return this.type === type;
     },
     hasSecurity: function(type) {
       return this.security === type;
-    },
-    toggleSecurity: function() {
-      var isPublic = this.hasSecurity(LIST_SECURITY.public);
-      this.security = isPublic ? LIST_SECURITY.link : LIST_SECURITY.public;
+    }
+  };
+
+  var FirebaseList = $firebaseObject.$extend({
+    $$defaults: defaultList,
+    getLink: function() {
+      return this.$id ? 'www.ridiculi.st/' + this.$id : null;
     }
   });
 
