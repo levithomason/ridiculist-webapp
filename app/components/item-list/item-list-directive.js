@@ -21,7 +21,6 @@ function list($routeParams, $timeout, $location, ItemListFactory, LIST_TYPES) {
         }
         
         scope.$watch('itemList', function(newVal, oldVal) {
-          console.log(newVal, oldVal);
           scope.itemList.validate();
         }, true);
       };
