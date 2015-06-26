@@ -17,6 +17,7 @@
     
     .lst-list-item {
       cursor: pointer;
+      padding-left: 1em;
       .lst-transition(color;);
       &:hover {
         color: @lst-brand-primary;
@@ -101,6 +102,15 @@
         left: 0;
         user-select: none;
         font-size: 1.2em;
+      }
+
+      .lst-item-value {
+        position: absolute;
+        top: 0;
+        left: 1.325em;
+        line-height: 1;
+        font-size: 0.825em;
+        color: #AAA;
       }
 
       .lst-form-control {

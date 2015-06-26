@@ -1,92 +1,94 @@
 <form class="lst-list-form" ng-class="{'is-read-only': !isNew}">
-    <div class="lst-list-heading">
-        <div class="lst-form-control lst-title">
-            <div class="lst-list-title-display">{{ itemList.list.title }}</div>
-            <input type="text"
-                   ng-model="itemList.list.title"
-                   placeholder="title"
-                   class="lst-list-title-input"
-                   maxlength="24"
-                   autofocus="autofocus"/>
-        </div>
+  <div class="lst-list-heading">
+    <div class="lst-form-control lst-title">
+      <div class="lst-list-title-display">{{ itemList.list.title }}</div>
+      <input type="text"
+             ng-model="itemList.list.title"
+             placeholder="title"
+             class="lst-list-title-input"
+             maxlength="24"
+             autofocus="autofocus"/>
     </div>
+  </div>
 
-    <div class="lst-list-types">
-        <button type="button"
-                class="lst-type lst-todo"
-                ng-class="{active: itemList.list.type === LIST_TYPES.todo}"
-                ng-click="setListType(LIST_TYPES.todo)">
-            <i class="ion-android-checkbox-outline"></i>
-            todo
-        </button>
-        <button type="button"
-                class="lst-type lst-vote"
-                ng-class="{active: itemList.list.type === LIST_TYPES.vote}"
-                ng-click="setListType(LIST_TYPES.vote)">
-            <i class="ion-android-star-outline"></i>
-            vote
-        </button>
-        <button type="button"
-                class="lst-type lst-survey"
-                ng-class="{active: itemList.list.type === LIST_TYPES.survey}"
-                ng-click="setListType(LIST_TYPES.survey)">
-            <i class="ion-android-radio-button-on"></i>
-            survey
-        </button>
-    </div>
-
-    <div class="lst-list-items">
-        <div class="lst-list-item"
-             ng-repeat="item in itemList.items track by $index"
-             ng-class="{'active': item.$isSelected}" 
-             ng-click="onItemClick($index)">
-            <div class="lst-form-control-icon">
-                <div class="lst-todo-item-control" ng-show="item.type === 'todo'">
-                    <i ng-hide="item.$isSelected" class="ion-android-checkbox-outline-blank"></i>
-                    <i ng-show="item.$isSelected" class="ion-android-checkbox-outline"></i>
-                </div>
-
-                <div class="lst-vote-item-control" ng-show="item.type === 'vote'">
-                    <i ng-show="item.$isSelected" class="ion-android-star"></i>
-                    <i ng-hide="item.$isSelected" class="ion-android-star-outline"></i>
-                </div>
-
-                <div class="lst-survey-item-control" ng-show="item.type === 'survey'">
-                    <i ng-show="item.$isSelected" class="ion-android-radio-button-on"></i>
-                    <i ng-hide="item.$isSelected" class="ion-android-radio-button-off"></i>
-                </div>
-            </div>
-
-            <div class="lst-form-control">
-                <div class="lst-list-item-display">{{ item.name }}</div>
-                <input type="text"
-                       class="lst-list-item-input"
-                       placeholder="Add item"
-                       ng-model="item.name"
-                       ng-change="onItemChange()"
-                       ng-keydown="onKeydown($event, $index)"
-                        />
-            </div>
-            <small>{{ item.value + item.$isSelected}}</small>
-        </div>
-    </div>
-
-    <div class="lst-list-options">
-        <a href="" target="_parent" ng-click="toggleFeatured()" ng-show="itemList.list.security === 'public'">Show</a>
-        <a href="" target="_parent" ng-click="toggleFeatured()" ng-show="itemList.list.security === 'link'">Hide</a>
-        this on ridiculi.st
-    </div>
-
-    <button class="lst-list-btn lst-list-save btn btn-block btn-lg"
-            type="button"
-            ng-click="create()">
-        Save
+  <div class="lst-list-types">
+    <button type="button"
+            class="lst-type lst-todo"
+            ng-class="{active: itemList.list.type === LIST_TYPES.todo}"
+            ng-click="setListType(LIST_TYPES.todo)">
+      <i class="ion-android-checkbox-outline"></i>
+      todo
     </button>
+    <button type="button"
+            class="lst-type lst-vote"
+            ng-class="{active: itemList.list.type === LIST_TYPES.vote}"
+            ng-click="setListType(LIST_TYPES.vote)">
+      <i class="ion-android-star-outline"></i>
+      vote
+    </button>
+    <button type="button"
+            class="lst-type lst-survey"
+            ng-class="{active: itemList.list.type === LIST_TYPES.survey}"
+            ng-click="setListType(LIST_TYPES.survey)">
+      <i class="ion-android-radio-button-on"></i>
+      survey
+    </button>
+  </div>
 
-    <div class="lst-list-btn lst-list-get-link btn btn-block btn-lg"
-         clip-copy="getLink()" 
-         clip-click="onCopy()">
-        <span ng-hide="linkCopied"><i class="ion ion-link"></i> get link</span>
-        <span ng-show="linkCopied"> Copied! </span>
+  <div class="lst-list-items">
+    <div class="lst-list-item"
+         ng-repeat="item in itemList.items track by $index"
+         ng-class="{'active': item.$isSelected}"
+         ng-click="toggleItem($index)">
+      <div class="lst-form-control-icon">
+        <div class="lst-todo-item-control" ng-show="item.type === 'todo'">
+          <i ng-hide="item.$isSelected" class="ion-android-checkbox-outline-blank"></i>
+          <i ng-show="item.$isSelected" class="ion-android-checkbox-outline"></i>
+        </div>
+
+        <div class="lst-vote-item-control" ng-show="item.type === 'vote'">
+          <i ng-show="item.$isSelected" class="ion-android-star"></i>
+          <i ng-hide="item.$isSelected" class="ion-android-star-outline"></i>
+        </div>
+
+        <div class="lst-survey-item-control" ng-show="item.type === 'survey'">
+          <i ng-show="item.$isSelected" class="ion-android-radio-button-on"></i>
+          <i ng-hide="item.$isSelected" class="ion-android-radio-button-off"></i>
+        </div>
+      </div>
+
+      <div class="lst-form-control">
+        <div class="lst-list-item-display">{{ item.name }}</div>
+        <input type="text"
+               class="lst-list-item-input"
+               placeholder="Add item"
+               ng-model="item.name"
+               ng-change="onItemChange()"
+               ng-keydown="onKeydown($event, $index)"
+          />
+      </div>
+      <div class="lst-item-value" ng-show="item.type !== LIST_TYPES.todo && item.value">
+        {{ item.value }}
+      </div>
     </div>
+  </div>
+
+  <div class="lst-list-options">
+    <a href="" target="_parent" ng-click="toggleFeatured()" ng-show="itemList.list.security === 'public'">Show</a>
+    <a href="" target="_parent" ng-click="toggleFeatured()" ng-show="itemList.list.security === 'link'">Hide</a>
+    this on ridiculi.st
+  </div>
+
+  <button class="lst-list-btn lst-list-save btn btn-block btn-lg"
+          type="button"
+          ng-click="create()">
+    Save
+  </button>
+
+  <div class="lst-list-btn lst-list-get-link btn btn-block btn-lg"
+       clip-copy="getLink()"
+       clip-click="onCopy()">
+    <span ng-hide="linkCopied"><i class="ion ion-link"></i> get link</span>
+    <span ng-show="linkCopied"> Copied! </span>
+  </div>
 </form>

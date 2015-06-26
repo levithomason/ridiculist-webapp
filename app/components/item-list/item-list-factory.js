@@ -55,16 +55,18 @@ var ItemListFactory = function($q, ItemFactory, ListFactory, LIST_TYPES, LIST_SE
     var deferred = $q.defer();
     var self = this;
 
-    // save list then
+    // save list then add items with listId
     lists.$add(self.list).then(function(savedList) {
       var listId = savedList.key();
+      // add saved list back to itemList
       self.list = new ListFactory(listId);
 
       angular.forEach(self.items, function(item, i) {
         // skip blank items
         if (!item.name) return;
+
+        // record listId on item
         item.listId = self.list.$id;
-        console.log(item);
         items.$add(item).then(function(savedItem) {
           // add saved item back to itemList
           self.items[i] = savedItem;
@@ -84,29 +86,25 @@ var ItemListFactory = function($q, ItemFactory, ListFactory, LIST_TYPES, LIST_SE
     var newItem = new ItemFactory();
     newItem.type = this.list.type;
     this.items.push(newItem);
-    return this;
   };
 
   ItemList.prototype.toggleItem = function(index) {
-    var self = this;
-    var isSurvey = self.list.type === LIST_TYPES.survey;
+    var item = this.items[index];
+    // don't toggle items on unsaved lists
+    if (!this.list.$id) return;
 
-    if (!isSurvey) {
-      self.items[index].toggle();
-    } else {
-      // deselect all other items first
-      angular.forEach(self.items, function(item, i) {
-        if (i !== index) {
-          console.log('isSurvey, set value to off:', i);
-          item.setValue(0);
-        }
-      });
+    // if survey item was clicked
+    // deselect the current item
+    if (item.isType(LIST_TYPES.survey)) {
+      var currentItem = this.items.filter(function(itm) {
+        return itm.$isSelected;
+      })[0];
 
-      // select the item
-      self.items[index].setValue(1);
+      if (currentItem) currentItem.toggle();
     }
 
-    return this;
+    // select the new item
+    item.toggle();
   };
 
   return ItemList;

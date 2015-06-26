@@ -11,6 +11,12 @@ var ListFactory = function(FIREBASE, $firebaseObject, LIST_TYPES) {
     $$defaults: defaultList,
     getLink: function() {
       return this.$id ? 'www.ridiculi.st/' + this.$id : null;
+    },
+    isType: function(type) {
+      return this.type === type;
+    },
+    hasSecurity: function(type) {
+      return this.security === type;
     }
   });
 
@@ -19,8 +25,8 @@ var ListFactory = function(FIREBASE, $firebaseObject, LIST_TYPES) {
   }
 
   List.toggleSecurity = function(list) {
-    var isPublic = list.security === 'public';
-    list.security = isPublic ? 'link' : 'public';
+    var isPublic = list.hasSecurity(LIST_SECURITY.public);
+    list.security = isPublic ? LIST_SECURITY.link : LIST_SECURITY.public;
   };
 
   return List;
@@ -29,12 +35,3 @@ var ListFactory = function(FIREBASE, $firebaseObject, LIST_TYPES) {
 angular.module('App.itemList')
   .factory('ListFactory', ListFactory)
 ;
-
-///////////////////////////////////////////////////////////////////////////////
-//List.prototype.add = function() {
-//  return lists.$add(this)
-//    .then(function(ref) {
-//      var savedRecord = lists.$getRecord(ref.key());
-//      return new List(savedRecord);
-//    });
-//};

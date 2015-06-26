@@ -56,11 +56,8 @@ function list($routeParams, $timeout, $location, ItemListFactory, LIST_TYPES) {
         }
       };
 
-      scope.onItemClick = function(index) {
-        // only handle click on saved lists, not new lists
-        if (!scope.isNew) {
-          scope.itemList.toggleItem(index);
-        }
+      scope.toggleItem = function(index) {
+        scope.itemList.toggleItem(index);
       };
 
       //
@@ -87,7 +84,6 @@ function list($routeParams, $timeout, $location, ItemListFactory, LIST_TYPES) {
       //
 
       scope.getLink = function() {
-        console.log('itemList directive getLink()', scope.itemList);
         return scope.itemList.getLink();
       };
 

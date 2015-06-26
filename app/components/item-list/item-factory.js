@@ -14,62 +14,65 @@ var ItemFactory = function(FIREBASE, LIST_TYPES, $firebaseObject, localStorageSe
 
   var FirebaseItem = $firebaseObject.$extend({
     $$defaults: defaultItem,
-    setSelection: function() {
-      var self = this;
-      localStorageService.set(self.$id, true);
-      self.updateIsSelected();
+    // each time an update arrives from the server, apply the change locally
+    $$updated: function(snap) {
+      // apply the changes using the super method
+      var changed = $firebaseObject.prototype.$$updated.apply(this, arguments);
+
+      // todo items share their selected state for all users
+      // update selected state
+      // we want to update the selected state
+      this.updateIsSelected();
+
+      // return whether or not changes occurred
+      return changed;
     },
-    removeSelection: function() {
-      var self = this;
-      localStorageService.remove(self.$id);
-      self.updateIsSelected();
+    isType: function(type) {
+      return this.type === type;
     },
     updateIsSelected: function() {
-      var self = this;
-      var isTodo = self.type === LIST_TYPES.todo;
-      var isStored = localStorageService.get(self.$id);
-      self.$isSelected = isTodo ? self.value : isStored;
+      var isTodo = this.isType(LIST_TYPES.todo);
+      var isInStorage = localStorageService.get(this.$id);
+      this.$isSelected = isTodo ? this.value : isInStorage;
     },
-    setValue: function(val) {
-      var self = this;
-      self.value = val;
-      self.$save();
-      return this;
+    setSelected: function() {
+      // todo items have global state for all users
+      // don't store the selected state
+      if (this.isType(LIST_TYPES.todo)) return;
+      localStorageService.set(this.$id, true);
+      this.$isSelected = true;
+    },
+    removeSelected: function() {
+      // todo items have global state for all users
+      // don't store the selected state
+      if (this.isType(LIST_TYPES.todo)) return;
+      localStorageService.remove(this.$id);
+      this.$isSelected = false;
     },
     increment: function() {
       var self = this;
       self.value += 1;
-      self.$save();
-      return this;
+      self.setSelected();
+      self.$save().catch(function(err) {
+        // roll back on failed save
+        self.value -= 1;
+        self.removeSelected();
+        console.error(err);
+      });
     },
     decrement: function() {
       var self = this;
       self.value -= 1;
-      self.$save();
-      return this;
+      self.removeSelected();
+      self.$save().catch(function(err) {
+        // roll back on failed save
+        self.value += 1;
+        self.setSelected();
+        console.error(err);
+      });
     },
     toggle: function() {
-      switch (this.type) {
-        case LIST_TYPES.todo:
-          this.toggleBoolean();
-          break;
-        case LIST_TYPES.vote:
-          this.toggleSum();
-          break;
-        case LIST_TYPES.survey:
-          this.toggleSum();
-          break;
-      }
-      return this;
-    },
-    toggleBoolean: function() {
-      this.$isSelected === 0 ? this.setValue(1) : this.setValue(0);
-      return this;
-    }
-    ,
-    toggleSum: function() {
       this.$isSelected ? this.decrement() : this.increment();
-      return this;
     }
   });
 
@@ -81,39 +84,3 @@ var ItemFactory = function(FIREBASE, LIST_TYPES, $firebaseObject, localStorageSe
 angular.module('App.itemList')
   .factory('ItemFactory', ItemFactory)
 ;
-
-///////////////////////////////////////////////////////////////////////////////
-
-//Item.prototype.add = function() {
-//  var deferred = $q.defer();
-//  var itemObj;
-//  var self = this;
-//
-//  if (!self.listId) {
-//    throw new Error('Item.save() requires a `listId` property to save.')
-//  }
-//
-//  items.$add(self)
-//    .then(function(ref) {
-//      var itemId = ref.key();
-//      var itemRef = new Firebase(FIREBASE.items).child(itemId);
-//      itemObj = $firebaseObject(itemRef);
-//
-//      return itemObj.$loaded()
-//    })
-//
-//    .then(function(itemObj) {
-//      console.log('itemObj', itemObj);
-//      var newItem = new Item(itemObj);
-//      console.log('newItem', newItem);
-//      deferred.resolve(newItem);
-//
-//      // To make the data available in the DOM, assign it to $scope
-//      //$scope.data = obj;
-//
-//      // For three-way data bindings, bind it to the scope instead
-//      //obj.$bindTo($scope, "data");
-//    });
-//
-//  return deferred.promise;
-//};
