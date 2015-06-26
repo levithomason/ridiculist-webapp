@@ -1,4 +1,5 @@
 .lst-list-form {
+  position: relative;
   padding: 20px;
   width: 400px;
   max-width: 95%;
@@ -6,15 +7,15 @@
   border-radius: @border-radius-base;
   background: #fff;
   box-shadow: 0 5px 20px fade(#000, 20);
-  &.is-read-only {
+  &.is-edit-mode {
     .lst-list-title-input,
     .lst-list-item-input,
     .lst-list-types,
     .lst-list-options,
-    .lst-list-save {
+    .lst-list-create {
       display: none;
     }
-    
+
     .lst-list-item {
       cursor: pointer;
       padding-left: 1em;
@@ -25,11 +26,23 @@
     }
   }
 
-  &:not(.is-read-only) {
+  &:not(.is-edit-mode) {
     .lst-list-title-display,
     .lst-list-item-display,
     .lst-list-get-link {
       display: none;
+    }
+  }
+
+  .lst-list-controls {
+    color: #AAA;
+    font-size: 1.5em;
+    text-align: left;
+    .lst-list-control {
+      cursor: pointer;
+      &:hover {
+        color: @lst-brand-primary;
+      }
     }
   }
 

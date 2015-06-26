@@ -1,4 +1,4 @@
-var ItemListFactory = function($q, ItemFactory, ListFactory, LIST_TYPES, LIST_SECURITY, $firebaseArray) {
+var ItemListFactory = function($q, ItemFactory, ListFactory, LIST_TYPES, LIST_SECURITY, $firebaseArray, localStorageService) {
   var itemsRef = new Firebase(FIREBASE.items);
   var listsRef = new Firebase(FIREBASE.lists);
   var items = $firebaseArray(itemsRef);
@@ -18,6 +18,7 @@ var ItemListFactory = function($q, ItemFactory, ListFactory, LIST_TYPES, LIST_SE
     this.items = [];
     this.list = new ListFactory();
     this.isValid = false;
+    this.isEditMode = true;
 
     angular.extend(this, itemList);
   }
@@ -33,6 +34,8 @@ var ItemListFactory = function($q, ItemFactory, ListFactory, LIST_TYPES, LIST_SE
       });
     });
 
+    itemList.isAuthor = itemList.getAuthor();
+    itemList.isEditMode = false;
     return itemList;
   };
 
@@ -55,10 +58,22 @@ var ItemListFactory = function($q, ItemFactory, ListFactory, LIST_TYPES, LIST_SE
   ItemList.prototype.validate = function() {
     var hasTitle = !!this.list.title.trim();
     var hasItems = this.items.filter(function(item) {
-      return !!item.name.trim()
+      return angular.isString(item.name) ? !!item.name.trim() : false;
     }).length;
 
     this.isValid = hasTitle && hasItems;
+  };
+
+  ItemList.prototype.setAuthor = function() {
+    if (this.list.$id) {
+      localStorageService.set(this.list.$id, true);
+    }
+  };
+
+  ItemList.prototype.getAuthor = function() {
+    var isAuthor = localStorageService.get(this.list.$id);
+    console.log('getAuthor', isAuthor);
+    return isAuthor;
   };
 
   ItemList.prototype.create = function() {
@@ -73,6 +88,9 @@ var ItemListFactory = function($q, ItemFactory, ListFactory, LIST_TYPES, LIST_SE
         var listId = savedList.key();
         // add saved list back to itemList
         self.list = new ListFactory(listId);
+
+        // record this user's browser as the author
+        self.setAuthor();
 
         angular.forEach(self.items, function(item, i) {
           // skip blank items
@@ -92,6 +110,13 @@ var ItemListFactory = function($q, ItemFactory, ListFactory, LIST_TYPES, LIST_SE
 
     return deferred.promise;
   };
+  
+  ItemList.prototype.destroy = function() {
+    this.list.$remove();
+    angular.forEach(this.items, function(item) {
+      item.$remove();
+    });
+  };
 
   //
   // Items
@@ -104,8 +129,8 @@ var ItemListFactory = function($q, ItemFactory, ListFactory, LIST_TYPES, LIST_SE
 
   ItemList.prototype.toggleItem = function(index) {
     var item = this.items[index];
-    // don't toggle items on unsaved lists
-    if (!this.list.$id) return;
+    // don't toggle items on lists in edit mode
+    if (this.isEditMode) return;
 
     // if survey item was clicked
     // deselect the current item

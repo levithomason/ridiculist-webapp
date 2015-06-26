@@ -1,6 +1,6 @@
 'use strict';
 
-function list($routeParams, $timeout, $location, ItemListFactory, LIST_TYPES) {
+function list($routeParams, $timeout, $location, ItemListFactory, LIST_TYPES, $interval) {
   return {
     restrict: 'E',
     replace: true,
@@ -11,18 +11,17 @@ function list($routeParams, $timeout, $location, ItemListFactory, LIST_TYPES) {
 
       scope.init = function() {
         scope.LIST_TYPES = LIST_TYPES;
-        scope.isNew = !listId;
 
-        if (scope.isNew) {
+        if (listId) {
+          scope.itemList = ItemListFactory.getByListId(listId);
+        } else {
           scope.itemList = new ItemListFactory();
           scope.addItem();
-        } else {
-          scope.itemList = ItemListFactory.getByListId(listId);
         }
-        
-        scope.$watch('itemList', function(newVal, oldVal) {
+
+        $interval(function() {
           scope.itemList.validate();
-        }, true);
+        }, 200);
       };
 
       //
@@ -61,7 +60,9 @@ function list($routeParams, $timeout, $location, ItemListFactory, LIST_TYPES) {
       };
 
       scope.toggleItem = function(index) {
-        scope.itemList.toggleItem(index);
+        if (!scope.isReadOnly) {
+          scope.itemList.toggleItem(index);
+        }
       };
 
       //
@@ -73,7 +74,7 @@ function list($routeParams, $timeout, $location, ItemListFactory, LIST_TYPES) {
       };
 
       scope.toggleFeatured = function() {
-        ListFactory.toggleSecurity(list);
+        scope.itemList.list.toggleSecurity();
       };
 
       scope.create = function() {
@@ -81,6 +82,11 @@ function list($routeParams, $timeout, $location, ItemListFactory, LIST_TYPES) {
           scope.itemList = itemList;
           $location.path(itemList.list.$id);
         });
+      };
+
+      scope.destroy = function() {
+        scope.itemList.destroy();
+        $location.path('/');
       };
 
       //

@@ -17,17 +17,16 @@ var ListFactory = function(FIREBASE, $firebaseObject, LIST_TYPES) {
     },
     hasSecurity: function(type) {
       return this.security === type;
+    },
+    toggleSecurity: function() {
+      var isPublic = this.hasSecurity(LIST_SECURITY.public);
+      this.security = isPublic ? LIST_SECURITY.link : LIST_SECURITY.public;
     }
   });
 
   function List(id) {
     return id ? new FirebaseList(ref.child(id)) : angular.copy(defaultList);
   }
-
-  List.toggleSecurity = function(list) {
-    var isPublic = list.hasSecurity(LIST_SECURITY.public);
-    list.security = isPublic ? LIST_SECURITY.link : LIST_SECURITY.public;
-  };
 
   return List;
 };
