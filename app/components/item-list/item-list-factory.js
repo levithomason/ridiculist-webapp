@@ -71,9 +71,7 @@ var ItemListFactory = function($q, ItemFactory, ListFactory, LIST_TYPES, LIST_SE
   };
 
   ItemList.prototype.getAuthor = function() {
-    var isAuthor = localStorageService.get(this.list.$id);
-    console.log('getAuthor', isAuthor);
-    return isAuthor;
+    return localStorageService.get(this.list.$id);
   };
 
   ItemList.prototype.create = function() {

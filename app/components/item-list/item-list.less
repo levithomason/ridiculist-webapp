@@ -8,6 +8,14 @@
   background: #fff;
   box-shadow: 0 5px 20px fade(#000, 20);
   &.is-edit-mode {
+    .lst-list-title-display,
+    .lst-list-item-display,
+    .lst-list-get-link {
+      display: none;
+    }
+  }
+
+  &:not(.is-edit-mode) {
     .lst-list-title-input,
     .lst-list-item-input,
     .lst-list-types,
@@ -23,14 +31,6 @@
       &:hover {
         color: @lst-brand-primary;
       }
-    }
-  }
-
-  &:not(.is-edit-mode) {
-    .lst-list-title-display,
-    .lst-list-item-display,
-    .lst-list-get-link {
-      display: none;
     }
   }
 

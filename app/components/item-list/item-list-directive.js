@@ -74,7 +74,7 @@ function list($routeParams, $timeout, $location, ItemListFactory, LIST_TYPES, $i
       };
 
       scope.toggleFeatured = function() {
-        scope.itemList.list.toggleSecurity();
+        scope.itemList.list.$toggleSecurity();
       };
 
       scope.create = function() {
