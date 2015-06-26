@@ -17,6 +17,7 @@ var ItemListFactory = function($q, ItemFactory, ListFactory, LIST_TYPES, LIST_SE
     // defaults
     this.items = [];
     this.list = new ListFactory();
+    this.isValid = false;
 
     angular.extend(this, itemList);
   }
@@ -51,30 +52,43 @@ var ItemListFactory = function($q, ItemFactory, ListFactory, LIST_TYPES, LIST_SE
     });
   };
 
+  ItemList.prototype.validate = function() {
+    var hasTitle = !!this.list.title.trim();
+    var hasItems = this.items.filter(function(item) {
+      return !!item.name.trim()
+    }).length;
+
+    this.isValid = hasTitle && hasItems;
+  };
+
   ItemList.prototype.create = function() {
     var deferred = $q.defer();
     var self = this;
 
-    // save list then add items with listId
-    lists.$add(self.list).then(function(savedList) {
-      var listId = savedList.key();
-      // add saved list back to itemList
-      self.list = new ListFactory(listId);
+    if (!self.isValid) {
+      deferred.reject('ItemList is not valid, cannot create()');
+    } else {
+      // save list then add items with listId
+      lists.$add(self.list).then(function(savedList) {
+        var listId = savedList.key();
+        // add saved list back to itemList
+        self.list = new ListFactory(listId);
 
-      angular.forEach(self.items, function(item, i) {
-        // skip blank items
-        if (!item.name) return;
+        angular.forEach(self.items, function(item, i) {
+          // skip blank items
+          if (!item.name) return;
 
-        // record listId on item
-        item.listId = self.list.$id;
-        items.$add(item).then(function(savedItem) {
-          // add saved item back to itemList
-          self.items[i] = savedItem;
+          // record listId on item
+          item.listId = self.list.$id;
+          items.$add(item).then(function(savedItem) {
+            // add saved item back to itemList
+            self.items[i] = savedItem;
+          });
         });
-      });
 
-      deferred.resolve(self);
-    });
+        deferred.resolve(self);
+      });
+    }
 
     return deferred.promise;
   };

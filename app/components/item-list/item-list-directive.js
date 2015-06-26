@@ -19,6 +19,11 @@ function list($routeParams, $timeout, $location, ItemListFactory, LIST_TYPES) {
         } else {
           scope.itemList = ItemListFactory.getByListId(listId);
         }
+        
+        scope.$watch('itemList', function(newVal, oldVal) {
+          console.log(newVal, oldVal);
+          scope.itemList.validate();
+        }, true);
       };
 
       //

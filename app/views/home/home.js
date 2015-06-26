@@ -14,11 +14,12 @@ angular.module('App')
       });
   })
 
-  .controller('Controller', function($scope, FIREBASE, $firebaseObject, $routeParams, LIST_ICONS, $window, $timeout) {
-    var publicListsRef = new Firebase(FIREBASE.lists);
+  .controller('Controller', function($scope, FIREBASE, $firebaseObject, $routeParams, LIST_ICONS, LIST_SECURITY) {
+    var publicListsRef = new Firebase(FIREBASE.lists)
+      .orderByChild('security')
+      .equalTo(LIST_SECURITY.public);
     $scope.lists = $firebaseObject(publicListsRef);
     $scope.LIST_ICONS = LIST_ICONS;
-
 
     $scope.idUrlParam = $routeParams.id;
   });
