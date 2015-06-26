@@ -1,43 +1,51 @@
 var ItemFactory = function(FIREBASE, LIST_TYPES, $firebaseObject, localStorageService) {
   var ref = new Firebase(FIREBASE.items);
-  
+
   var defaultItem = {
     listId: '',
     name: '',
     sort: 0,
     type: LIST_TYPES.todo,
-    value: 0
+    value: 0,
+    // this is a per user property
+    // angular will scrub $ props before it is posted to firebase
+    $isSelected: false
   };
 
   var FirebaseItem = $firebaseObject.$extend({
     $$defaults: defaultItem,
-    select: function(isSelected) {
-      localStorageService.set(this.$id, isSelected);
+    setSelection: function() {
+      var self = this;
+      localStorageService.set(self.$id, true);
+      self.updateIsSelected();
     },
-    unselect: function() {
-      localStorageService.remove(this.$id);
+    removeSelection: function() {
+      var self = this;
+      localStorageService.remove(self.$id);
+      self.updateIsSelected();
     },
-    isSelected: function() {
-      var isTodo = this.type === LIST_TYPES.todo;
-      var storedState = localStorageService.get(this.$id);
-      return isTodo ? this.value : storedState;
+    updateIsSelected: function() {
+      var self = this;
+      var isTodo = self.type === LIST_TYPES.todo;
+      var isStored = localStorageService.get(self.$id);
+      self.$isSelected = isTodo ? self.value : isStored;
     },
     setValue: function(val) {
-      this.value = val;
-      this.select(true);
-      this.$save();
+      var self = this;
+      self.value = val;
+      self.$save();
       return this;
     },
     increment: function() {
-      this.value += 1;
-      this.$save();
-      this.select(true);
+      var self = this;
+      self.value += 1;
+      self.$save();
       return this;
     },
     decrement: function() {
-      this.value -= 1;
-      this.unselect();
-      this.$save();
+      var self = this;
+      self.value -= 1;
+      self.$save();
       return this;
     },
     toggle: function() {
@@ -55,12 +63,12 @@ var ItemFactory = function(FIREBASE, LIST_TYPES, $firebaseObject, localStorageSe
       return this;
     },
     toggleBoolean: function() {
-      this.isSelected() === 0 ? this.setValue(1) : this.setValue(0);
+      this.$isSelected === 0 ? this.setValue(1) : this.setValue(0);
       return this;
     }
     ,
     toggleSum: function() {
-      this.isSelected() ? this.decrement() : this.increment();
+      this.$isSelected ? this.decrement() : this.increment();
       return this;
     }
   });

@@ -20,7 +20,7 @@ angular.module('App', [
   .config(function(localStorageServiceProvider) {
     localStorageServiceProvider
       .setPrefix('ridiculist')
-      .setStorageType('sessionStorage')
+      .setStorageType('localStorage')
       .setNotify(true, true)
   })
 

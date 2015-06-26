@@ -97,6 +97,7 @@ var ItemListFactory = function($q, ItemFactory, ListFactory, LIST_TYPES, LIST_SE
       // deselect all other items first
       angular.forEach(self.items, function(item, i) {
         if (i !== index) {
+          console.log('isSurvey, set value to off:', i);
           item.setValue(0);
         }
       });
