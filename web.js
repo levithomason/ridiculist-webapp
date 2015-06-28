@@ -6,7 +6,7 @@ var request = require('request');
 var bodyParser = require('body-parser');
 
 var slackHelper = require('./slack-helper');
-var pkg = require('../package.json');
+var pkg = require('./package.json');
 var inProduction = process.env.NODE_ENV === 'production';
 
 var PROJECT_ROOT = __dirname;
