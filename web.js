@@ -46,7 +46,7 @@ http.createServer(app).listen(PORT, function() {
   if (inProduction) {
     // keep alive
     setInterval(function() {
-      request.get("https://three-strand-code.herokuapp.com/");
+      request.get("https://ridiculist.herokuapp.com/");
     }, 300000);
   } else {
     // live reload
